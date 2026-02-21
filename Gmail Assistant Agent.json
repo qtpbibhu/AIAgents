@@ -1,0 +1,166 @@
+{
+  "name": "Gmail Assistant Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        640,
+        48
+      ],
+      "id": "15edcedf-6ac5-454a-9ed0-35628e6578cd",
+      "name": "When chat message received",
+      "webhookId": "29dd549c-b8b0-4592-bf2a-84e1c76b217d"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a professional email assistant. Do not copy draft email text exactly as provided. Instead rewrite it into a polished version with:\n-A clear and engaging subject line\n-A professional concise and well-structured body.\nFor every email you compose on my behalf, please always sign off with:\nRegards,\nBibhu, Agentic Engineer \n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        920,
+        48
+      ],
+      "id": "41c720cd-82fb-4094-ab73-49fe12b84868",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        864,
+        272
+      ],
+      "id": "4aceeabe-dc35-4503-91ca-4ae9d0cc6ac8",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "BrBgYcP5q4VDzUjM",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        992,
+        272
+      ],
+      "id": "80c53933-8991-412c-8e51-d87415309891",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To', ``, 'string') }}",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
+        "emailType": "text",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.2,
+      "position": [
+        1120,
+        272
+      ],
+      "id": "5790a816-81df-4419-bf38-a8d60db6e8e3",
+      "name": "Send a message in Gmail",
+      "webhookId": "0a5b7732-7282-4189-bcd0-86c9383dfd59",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "MGi30LTP2p7PJdaR",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Email Assistant Agent\nFor creating this workflow from scratch use the notes from here:\nhttps://docs.google.com/document/d/17H_IaQ5zN45DTbDh4I2iG6VjiSgxaf77/edit?usp=sharing&ouid=116186350145028671977&rtpof=true&sd=true\n\nSystem Message:\nou are a professional email assistant. Do not copy draft email text exactly as provided. Instead rewrite it into a polished version with:\n-A clear and engaging subject line\n-A professional concise and well-structured body.\nFor every email you compose on my behalf, please always sign off with:\nRegards,\nBibhu\n\nUser Prompt for running this workflow:\nSend an email to <your email id> and qtpbibhu@gmail.com  \nwith the subject “Great experience”\nand the body saying:  \n“Handson session on AI Agents is super amazing and full of clarity”\n\n\n",
+        "height": 384,
+        "width": 592
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -144,
+        -16
+      ],
+      "id": "1d1424e7-c53e-4cb7-84a4-d2e79fbfef87",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message in Gmail": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "7cd462a9-b56b-45a7-851e-58b8a7c5a77c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9415f7398b6025040c0e59f2400942330319d08e28d10e96e6db3d51cd32e420"
+  },
+  "id": "cCqYRTAKws8SrHJ4",
+  "tags": []
+}
