@@ -1,0 +1,1398 @@
+{
+  "name": "Complete Lead Enrichment Workflow - Final",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "4092b3d3-f939-4e65-b90e-20ec7cb0484b",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b6021867-3926-4701-9f06-25c67da736cd",
+      "name": "Webhook",
+      "webhookId": "4092b3d3-f939-4e65-b90e-20ec7cb0484b"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -704,
+        -15152
+      ],
+      "id": "6a6a62b4-2208-4f9d-badc-7d8aa5f88bba",
+      "name": "On form submission1",
+      "webhookId": "b23b3bf1-7f4d-4fba-9fb0-41848a00ee8f"
+    },
+    {
+      "parameters": {
+        "content": "# ⚡ Step 1 — Trigger\n\n## What is a Trigger?\n\nA Trigger is what starts a workflow.\n\nNo trigger = nothing runs.\n\n---\n\n## Our Trigger: Form Submission\n\nWhen someone fills out a form,  \nthe automation starts instantly.\n\n---\n\n## What We Collect\n\n- Full Name  \n- Email  \n- LinkedIn URL  \n- Company Website  \n\nThis becomes the input for our AI system.\n",
+        "height": 768,
+        "width": 1600
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1552,
+        -15456
+      ],
+      "id": "64bb93e1-7d49-41d6-9a3f-39f659445c34",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "content": "## ⚡ Step 1.1 — Trigger\n 1.1 Form Trigger completed with all the information\n\n\n# Just like How Google Form handles it\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n# We can also finalize or set the information so we don't have to enter it while testing",
+        "height": 720,
+        "width": 1632
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1552,
+        -14576
+      ],
+      "id": "69d20ebf-a12a-44ae-9ce8-b81079ecec27",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "content": "# 🚀 Step 0 — What is n8n?\n\n## 🔹 Simple Definition\n\n**n8n is a No-Code / Low-Code Automation Platform.**\n\nIt allows us to connect apps, move data, and build powerful automation systems — without writing full backend code.\n\n---\n\n## 🔹 What Can We Do With n8n?\n\nWith n8n, we can:\n\n- Connect different applications (Gmail, Google Sheets, APIs, AI tools)\n- Automate repetitive tasks\n- Move data between platforms automatically\n- Add AI into workflows\n- Build complete business systems visually\n\n---\n\n## 🔹 How Does n8n Work?\n\nThink of n8n like:\n\n> 🧱 Digital LEGO Blocks\n\n- Each block = one action  \n- We connect blocks together  \n- Connected blocks = a workflow  \n- A workflow = an automated system  \n\n---\n\n## 🔹 Key Concept: Workflow Structure\n\nEvery automation in n8n follows a simple logic:\n\n1. **Trigger** → Something starts the workflow  \n2. **Action** → Tasks happen automatically  \n3. **Output** → Final result is generated  \n\nThis simple structure can scale into very powerful systems.\n\n---\n\n## 🔹 Why We Are Using n8n Today\n\nToday, we will:\n\n- Start from a trigger\n- Connect multiple tools\n- Add AI into the workflow\n- Generate an automated output\n\nAnd we will build it:\n\n✅ Step-by-step  \n✅ In a simple way  \n✅ Without complexity  \n\n---\n\n## 🎯 Goal of This Session\n\nBy the end of this class, you will understand:\n\n- How automation actually works\n- How to think in workflows\n- How to build AI-powered systems visually\n",
+        "height": 1696,
+        "width": 1536,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1552,
+        -17264
+      ],
+      "id": "82b606e7-d61b-4aa3-8f79-0329d2942da8",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "formTitle": "CONTACT INFO",
+        "formDescription": "PREPARING PITCH DECK AND INFORMATION ABOUT THE CLIENT",
+        "formFields": {
+          "values": [
+            {
+              "fieldName": "name",
+              "fieldLabel": "FULL NAME",
+              "placeholder": "Name",
+              "requiredField": true
+            },
+            {
+              "fieldName": "email",
+              "fieldLabel": "Email Address",
+              "fieldType": "email",
+              "placeholder": "Enter your E-mail",
+              "requiredField": true
+            },
+            {
+              "fieldName": "linkedin_url",
+              "fieldLabel": "LinkedIn Profile URL",
+              "requiredField": true
+            },
+            {
+              "fieldName": "company_website",
+              "fieldLabel": "Company Website",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.4,
+      "position": [
+        -688,
+        -14352
+      ],
+      "id": "133dfda9-3c3c-4caf-99a4-5ea187ed7c6d",
+      "name": "On form submission2",
+      "webhookId": "2cf5a7b3-c57f-4187-ba1c-26f50fb8097d"
+    },
+    {
+      "parameters": {
+        "content": "# 🔐 Step 2 — Connecting Apps (Authentication)\n\n## Why Authentication?\nTo let n8n access other apps securely.\nWithout authentication, n8n cannot send or receive data.\n\n## Example: Connecting Gmail\n1. Add Gmail node  \n2. Click “Connect Credential”  \n3. Sign in with Google  \n4. Approve permissions  \nDone ✅ — n8n can now send emails automatically.\n\n## Connecting Other Apps\nMost apps connect using:\n- OAuth (Sign in)\n- API Keys\n- Access Tokens\n- App credentials\n\nOnce connected, credentials can be reused anytime.\n``\n",
+        "height": 656,
+        "width": 1632,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1552,
+        -13632
+      ],
+      "id": "7c8400c7-6eee-4e77-b102-ef40d4167b02",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Press Tab or + icon on the top right.\n\nYou will see different different apps\n"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        80,
+        -13392
+      ],
+      "id": "1098cefb-a700-43fe-8050-53053a1c64cf",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -624,
+        -13376
+      ],
+      "id": "7b3c306a-68e7-4b23-a8db-12e97cea13e2",
+      "name": "Send a message",
+      "webhookId": "36a24142-1998-4bbd-9290-b0e43be20d67"
+    },
+    {
+      "parameters": {
+        "content": "# 🔄 Step 3 — Connecting Nodes & Data Flow\n\n## Drag → Connect\nDrag from one node to another to create a connection.\nThis defines the flow: Trigger → Action → Output.\nThe output of one node becomes the input of the next.\n\n## How Data Moves\nEach node passes structured data (JSON) forward.\nExample: Form → Research → AI → Email.\nEvery step uses the previous step’s data.\n\n## Running Multiple Times\nEvery new trigger input creates a new execution.\nNew form submission = workflow runs again.\nThis makes automation scalable.\n",
+        "height": 624,
+        "width": 1648
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1552,
+        -12704
+      ],
+      "id": "072de02f-82ff-46a7-8b66-66b88991066d",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "formTitle": "CONTACT INFO",
+        "formDescription": "PREPARING PITCH DECK AND INFORMATION ABOUT THE CLIENT",
+        "formFields": {
+          "values": [
+            {
+              "fieldName": "name",
+              "fieldLabel": "FULL NAME",
+              "placeholder": "Name",
+              "requiredField": true
+            },
+            {
+              "fieldName": "email",
+              "fieldLabel": "Email Address",
+              "fieldType": "email",
+              "placeholder": "Enter your E-mail",
+              "requiredField": true
+            },
+            {
+              "fieldName": "linkedin_url",
+              "fieldLabel": "LinkedIn Profile URL",
+              "requiredField": true
+            },
+            {
+              "fieldName": "company_website",
+              "fieldLabel": "Company Website",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.4,
+      "position": [
+        -704,
+        -12480
+      ],
+      "id": "e3366400-30a2-428b-a42a-03c5111c951d",
+      "name": "On form submission",
+      "webhookId": "d8385e6e-5db4-4e90-8acf-fe5de91e3478"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -368,
+        -12480
+      ],
+      "id": "12b715dc-cee9-4201-acec-6389b7ab0b18",
+      "name": "Send a message1",
+      "webhookId": "36a24142-1998-4bbd-9290-b0e43be20d67"
+    },
+    {
+      "parameters": {
+        "content": "# We can also pin the request",
+        "width": 224,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        96,
+        -12640
+      ],
+      "id": "58875a1c-9d9e-4c32-a218-e3021740e353",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "# 🌐 Step 4 — Getting Data from External Services (APIs)\n\n## Why External Services?\nn8n does not store information itself. It connects to other services to fetch data. This happens using APIs. An API is simply a way for apps to talk to each other.\n\n## In Our Workflow\nWe connect to services like:\n- LinkedIn data tools\n- Website research tools\n- AI models\nn8n sends a request → Service returns data → Workflow continues.\n\n## How We Connect\nUsing:\n- OAuth login\n- API Keys\n- Access Tokens\nOnce connected, data can be fetched automatically anytime.\n``\n",
+        "height": 528,
+        "width": 1664,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1552,
+        -11936
+      ],
+      "id": "c011ed1d-cdf0-4775-a982-1ef0e265d82a",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "# 🌍 Step 4.1 — Searching Company Information (Why Tavily?)\n\n## Why Not Google?\nGoogle search is built for humans.\nIt returns web pages, ads, and mixed results.\nNot structured data for automation.\n\nAutomations need clean, usable data.\n\n## Why Tavily?\nTavily is built for AI and automation.\nIt returns structured results.\nEasy to extract.\nEasy to pass to the next node.\n\nn8n sends a query → Tavily returns company info → We process it.\n\n## What We Do With This Data\n- Understand what the company does\n- Identify services/products\n- Extract positioning\n- Use it for AI analysis later\n",
+        "height": 624,
+        "width": 1664
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1552,
+        -11232
+      ],
+      "id": "56a75064-7b63-4805-83e0-0a47e59d2054",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "# 🔑 Step 4.2 — Connecting Tavily (API Key Setup)\n\n## How to Get Tavily API Key\n1. Go to tavily.com  \n2. Create an account  \n3. Open Dashboard  \n4. Generate API Key  \n\nCopy the key.\n\n## How to Add in n8n\n1. Open Tavily node  \n2. Click “Create Credential”  \n3. Paste API Key  \n4. Save  \n\nNow n8n can fetch search data automatically.\n",
+        "height": 496,
+        "width": 496,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        112,
+        -11232
+      ],
+      "id": "0a15169c-8399-426c-ae53-75a417507e8c",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "# 🔎 Step 4.3 — Using Tavily Search + Crawl\n\n## Two Ways We Get Information\n\n1. Search → Finds insights about the company or industry.\n2. Crawl → Extracts content directly from the company website.\n\nSearch = External perspective.\nCrawl = Company’s own information.\n\n---\n\n## How It Connects\n\nForm Input (Company Website)\n→ Tavily Crawl (Get website content)\n→ Tavily Search (Find industry challenges)\n→ Data flows to next step\n\nEach node passes its output forward.\n\nNow we have:\n- Company description\n- Market positioning\n- Industry challenges\n\nThis becomes the input for AI analysis.\n",
+        "height": 672,
+        "width": 1664
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1536,
+        -10336
+      ],
+      "id": "ff81c811-e49b-4964-92dd-ea8d1b0536b1",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "formTitle": "CONTACT INFO",
+        "formDescription": "PREPARING PITCH DECK AND INFORMATION ABOUT THE CLIENT",
+        "formFields": {
+          "values": [
+            {
+              "fieldName": "name",
+              "fieldLabel": "FULL NAME",
+              "placeholder": "Name",
+              "requiredField": true
+            },
+            {
+              "fieldName": "email",
+              "fieldLabel": "Email Address",
+              "fieldType": "email",
+              "placeholder": "Enter your E-mail",
+              "requiredField": true
+            },
+            {
+              "fieldName": "linkedin_url",
+              "fieldLabel": "LinkedIn Profile URL",
+              "requiredField": true
+            },
+            {
+              "fieldName": "company_website",
+              "fieldLabel": "Company Website",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.4,
+      "position": [
+        -896,
+        -10048
+      ],
+      "id": "29d0e0b4-7e3d-4e7c-be44-2ab361fd2063",
+      "name": "On form submission3",
+      "webhookId": "f9fe90a1-e25b-4850-b3bb-9986f40914ca"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c732c93c-d7db-4231-80c8-dafc07fd4570",
+              "name": "final_result",
+              "value": "={{ $json.answer }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -336,
+        -8960
+      ],
+      "id": "2e097e71-b799-432a-a595-8022bb77a949",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c0cbf36f-0638-49dc-8e98-2fb045253913",
+              "name": "final_result",
+              "value": "={{ $json.results[0].raw_content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -336,
+        -9264
+      ],
+      "id": "be4c072c-f95b-44ac-9ba8-8e1c3a077af3",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "formTitle": "CONTACT INFO",
+        "formDescription": "PREPARING PITCH DECK AND INFORMATION ABOUT THE CLIENT",
+        "formFields": {
+          "values": [
+            {
+              "fieldName": "name",
+              "fieldLabel": "FULL NAME",
+              "placeholder": "Name",
+              "requiredField": true
+            },
+            {
+              "fieldName": "email",
+              "fieldLabel": "Email Address",
+              "fieldType": "email",
+              "placeholder": "Enter your E-mail",
+              "requiredField": true
+            },
+            {
+              "fieldName": "linkedin_url",
+              "fieldLabel": "LinkedIn Profile URL",
+              "requiredField": true
+            },
+            {
+              "fieldName": "company_website",
+              "fieldLabel": "Company Website",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.4,
+      "position": [
+        -864,
+        -9120
+      ],
+      "id": "84e4b691-ce00-403e-9002-a02ec48db7ab",
+      "name": "On form submission4",
+      "webhookId": "d201f195-d9f0-4ca0-a808-8866e0e761b7"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -112,
+        -8240
+      ],
+      "id": "026e8784-730c-4573-a038-99ca6b4489e4",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "final_result"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        96,
+        -8240
+      ],
+      "id": "75bfe703-ca53-473f-93d0-4296c3385094",
+      "name": "Aggregate1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c732c93c-d7db-4231-80c8-dafc07fd4570",
+              "name": "final_result",
+              "value": "={{ $json.answer }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -352,
+        -8064
+      ],
+      "id": "33659e84-5661-480b-a038-3459db274688",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c0cbf36f-0638-49dc-8e98-2fb045253913",
+              "name": "final_result",
+              "value": "={{ $json.results[0].raw_content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -368,
+        -8368
+      ],
+      "id": "7ec02a90-cdfa-4f12-be2e-9e298b3c3e83",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "formTitle": "CONTACT INFO",
+        "formDescription": "PREPARING PITCH DECK AND INFORMATION ABOUT THE CLIENT",
+        "formFields": {
+          "values": [
+            {
+              "fieldName": "name",
+              "fieldLabel": "FULL NAME",
+              "placeholder": "Name",
+              "requiredField": true
+            },
+            {
+              "fieldName": "email",
+              "fieldLabel": "Email Address",
+              "fieldType": "email",
+              "placeholder": "Enter your E-mail",
+              "requiredField": true
+            },
+            {
+              "fieldName": "linkedin_url",
+              "fieldLabel": "LinkedIn Profile URL",
+              "requiredField": true
+            },
+            {
+              "fieldName": "company_website",
+              "fieldLabel": "Company Website",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.4,
+      "position": [
+        -880,
+        -8224
+      ],
+      "id": "d4bc2a2e-906a-463d-8e19-10665e310457",
+      "name": "On form submission5",
+      "webhookId": "553fcafa-3569-4fcf-bac8-3ebb8f969cdc"
+    },
+    {
+      "parameters": {
+        "content": "# 🧠 Step 6 — Extracting & Storing Key Information\n\nAfter Crawl and Search, we receive a lot of raw data.\n\nBut raw data is messy.\nSo we use the “Edit Fields” node to:\n- Extract only important information\n- Rename it properly\n- Store it in clear variables\n\nExample:\ncompany_info\nindustry_challenges\n\nNow instead of passing full messy data,\nwe pass clean structured variables forward.\n\n## Real-Life Example\nIt’s like reading 50 pages of research\nand writing the key points in your notebook.\n\nLater, when you present,\nyou use the notes — not the full book.\nThat’s exactly what we’re doing here.\n",
+        "height": 736,
+        "width": 1536
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1456,
+        -9424
+      ],
+      "id": "1f7c113f-9660-4cec-9476-d57714fe644d",
+      "name": "Sticky Note14"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6bd3d6f1-f857-455a-9a60-01c9d4e9deb7",
+              "name": "company_website",
+              "value": "={{ $json.final_result[0] }}",
+              "type": "string"
+            },
+            {
+              "id": "21ba2254-e66e-4820-8338-91edf94a4c76",
+              "name": "company_challenges",
+              "value": "={{ $json.final_result[1] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        304,
+        -8240
+      ],
+      "id": "77035952-fcad-4398-98b8-05af228b3ba7",
+      "name": "company research & Challenges"
+    },
+    {
+      "parameters": {
+        "content": "# 🔗 Step 6.1 — Combining All Research Data\n\nNow we join everything together.\n\nWe use:\n- Merge → to combine Crawl and Search outputs\n- Aggregate → to group them into one structured dataset\n\nMerge brings multiple streams into one.\nAggregate organizes them properly.\n\nAfter this, we rename and structure the final output as:\ncompany_research\nindustry_challenges\n\n## Real-Life Example\nIt’s like collecting notes from two team members,\nthen compiling them into one final research document.\n\nNow we have complete, organized information ready for AI analysis.\n",
+        "height": 752,
+        "width": 1968
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1456,
+        -8560
+      ],
+      "id": "fbde9455-a57b-46f5-8e27-096f53ec1474",
+      "name": "Sticky Note12"
+    },
+    {
+      "parameters": {
+        "content": "# 👤 Step 9 — Getting Data from Platforms (Smart Automation Thinking)\n\n## Why We Cannot Directly Access Everything\nTools like LinkedIn, Instagram, Amazon, or even some websites are built for humans. They don’t allow automation tools like n8n to freely access data.\n\nJust like you log in and browse manually, automation cannot do that directly.\n\n---\n\n## The Smart Approach\nInstead of accessing platforms directly, we use specialized services.\n\nExample:\n- LinkedIn → Use a scraping service\n- Website data → Use crawl/search tools\n- Financial data → Use APIs\n- CRM data → Use official integrations\n\nn8n connects to these services, not the website directly.\n\n---\n\n## Real-World Automation Thinking\nProfessionals don’t “hack” systems.\nThey use:\n- Official APIs\n- Scraping services\n- Data providers\n- Automation-friendly tools\n\nThis is how scalable systems are built.\n\nAutomation is not just connecting nodes.\nIt’s knowing which tool to use for which job.\n",
+        "height": 896,
+        "width": 1680
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1312,
+        -2352
+      ],
+      "id": "c3fd9add-45d3-42ac-98a5-5291bdfc7c40",
+      "name": "Sticky Note11"
+    },
+    {
+      "parameters": {
+        "content": "# 🧠 Step 7 — AI as the Brain of Our System\n\n## Why We Need AI\nSo far, we have collected and organized data.\nNow we need something that can think.\n\nData alone is not useful.\nWe need intelligence to interpret it.\n\n## AI = Artificial Brain\nJust like we:\n- Read information\n- Understand context\n- Identify patterns\n- Make decisions\n\nAn LLM (Large Language Model) does the same — but at scale.\n\n## What We Use\nWe connect an OpenAI / ChatGPT node inside n8n.\nn8n provides OpenAI credits, so we can use it directly.\n\nWe send structured research data to the AI.\nAI analyzes it and generates insights.\n\n## How the System Now Works\nData → AI Brain → Insights → Output\n\n## Important Mindset Shift\nUsing ChatGPT manually = AI user.\nEmbedding AI inside automation = AI builder.\n\nToday, we are building systems — not just prompting.\n",
+        "height": 912,
+        "width": 2288
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1472,
+        -6624
+      ],
+      "id": "d79e176c-f964-4445-b7a8-0e030247098a",
+      "name": "Sticky Note13"
+    },
+    {
+      "parameters": {
+        "content": "![success](https://static01.nyt.com/images/2020/01/28/multimedia/28xp-memekid3/28cp-memekid3-superJumbo.jpg?quality=75&auto=webp)",
+        "height": 624,
+        "width": 896
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1184,
+        -7712
+      ],
+      "id": "d436ae22-6d6e-4ac4-a0bc-aa9ba7e08b23",
+      "name": "Sticky Note15"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-5-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "={{ $json.chatInput }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        -224,
+        -6288
+      ],
+      "id": "bf2c266f-98fc-4c2e-aae6-a84d6a452133",
+      "name": "Message a model"
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseMode": "responseNodes"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -480,
+        -6288
+      ],
+      "id": "7fbd630e-d660-49ac-af85-2ef2ec4d9ef3",
+      "name": "When chat message received",
+      "webhookId": "dc2c2958-d8a0-4e3a-b0eb-006182874330"
+    },
+    {
+      "parameters": {
+        "message": "={{ $json.output[0].content[0].text }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1.1,
+      "position": [
+        208,
+        -6288
+      ],
+      "id": "c417ccfa-e65b-4b54-ba3e-b71bbeeeb3f3",
+      "name": "Chat",
+      "webhookId": "37899c91-a95c-4357-8e2f-3a813fc2a59b"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -32,
+        -4704
+      ],
+      "id": "33d176a8-5928-4656-93df-53dde59be9f5",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "final_result"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        176,
+        -4704
+      ],
+      "id": "3f28df90-1aed-4315-9764-db4eab20042d",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c732c93c-d7db-4231-80c8-dafc07fd4570",
+              "name": "final_result",
+              "value": "={{ $json.answer }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -272,
+        -4528
+      ],
+      "id": "ecee7722-0b04-4556-b344-c2965131cf7e",
+      "name": "Edit Fields4"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c0cbf36f-0638-49dc-8e98-2fb045253913",
+              "name": "final_result",
+              "value": "={{ $json.results[0].raw_content }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -288,
+        -4832
+      ],
+      "id": "05731665-f896-415e-96dc-4e4d5dafbd95",
+      "name": "Edit Fields5"
+    },
+    {
+      "parameters": {
+        "formTitle": "CONTACT INFO",
+        "formDescription": "PREPARING PITCH DECK AND INFORMATION ABOUT THE CLIENT",
+        "formFields": {
+          "values": [
+            {
+              "fieldName": "name",
+              "fieldLabel": "FULL NAME",
+              "placeholder": "Name",
+              "requiredField": true
+            },
+            {
+              "fieldName": "email",
+              "fieldLabel": "Email Address",
+              "fieldType": "email",
+              "placeholder": "Enter your E-mail",
+              "requiredField": true
+            },
+            {
+              "fieldName": "linkedin_url",
+              "fieldLabel": "LinkedIn Profile URL",
+              "requiredField": true
+            },
+            {
+              "fieldName": "company_website",
+              "fieldLabel": "Company Website",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.4,
+      "position": [
+        -800,
+        -4688
+      ],
+      "id": "4ba6b3e2-a900-479f-84a4-d21f5fa0810d",
+      "name": "On form submission6",
+      "webhookId": "040ecf3f-f5c4-4645-9d84-1cfeedd7f426"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "6bd3d6f1-f857-455a-9a60-01c9d4e9deb7",
+              "name": "company_website",
+              "value": "={{ $json.final_result[0] }}",
+              "type": "string"
+            },
+            {
+              "id": "21ba2254-e66e-4820-8338-91edf94a4c76",
+              "name": "company_challenges",
+              "value": "={{ $json.final_result[1] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        384,
+        -4704
+      ],
+      "id": "6c51b08c-b590-4585-8068-e5f05bbe37b1",
+      "name": "company research & Challenges1"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-5-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "=You are part of the Business Development team at an AI Automation Agency that designs and implements production-ready AI-driven workflows and agents to replace or optimize manual business processes.\n\nYour agency provides:\n\n- AI Assistants & Chatbots\n- RAG Systems (Document Q&A, Knowledge Bases)\n- Workflow Automation (n8n, APIs, AI Agents)\n- Decision-Making Agents\n- SaaS AI Integration\n- Internal AI-Powered Tools & Dashboards\n\nThe agency focuses strictly on high-ROI automation that saves time, reduces operational costs, or increases revenue.\n\nA new company has booked a consultation call.\n\nYour job is to analyze the provided research and generate a complete Business Development Intelligence Report that will help consultants prepare a highly personalized and high-conversion pitch.\n\nYou are provided with:\n\nCompany Website Research:\n{{ $json.company_research }}\n\nIndustry Challenges Research:\n{{ $json.industry_challenges }}\n\nYour task is to generate a structured HTML report with the following sections:\n\nCompany Profile (Heading 2)\nProvide a clear, professional one-paragraph summary explaining:\n- What the company does\n- Their positioning\n- Services/products\n- Market focus\n\nCore Offerings (Heading 2)\nList their main products/services in bullet point format.\n\nTarget Market (Heading 2)\nBriefly explain who they serve and in which industry.\n\nObserved Strategic Priorities (Heading 2)\nBased on the website and positioning, infer 3–5 likely business priorities.\n\nIndustry Pain Points (Heading 2)\nBased on the industry research and company type, list the most relevant operational or strategic pain points they are likely facing.\n\nPain Points and AI Solutions (Heading 2)\nCreate a table with 3 columns:\n1. Pain Point – What challenge they are likely facing.\n2. Evidence – Why this is relevant to them based on research.\n3. AI Automation Solution – A specific automation solution our agency can implement.\n\nHigh-ROI Automation Opportunities (Heading 2)\nList the 5 highest ROI automation opportunities for this company.\nSort them in order of highest impact first.\nEach opportunity must include:\n- Name of opportunity\n- What it does\n- Why it is high ROI\n- Expected business impact (time saved, cost reduced, revenue improved)\n\nExecutive Pitch Angle (Heading 2)\nProvide a short strategic summary explaining how our agency should position the conversation during the consultation call to maximize conversion.\n\nImportant:\n- The output must be clean HTML.\n- Use proper <h2>, <ul>, <li>, <table>, <tr>, <td> formatting.\n- Do NOT wrap the output in ```html```.\n- This report will be inserted into the middle of an existing HTML document.\n\nGenerate a complete, strategic, pitch-ready report.\n"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        -272,
+        -5520
+      ],
+      "id": "1c60a267-11c3-4216-9a33-02f691ecb606",
+      "name": "Message a model1"
+    },
+    {
+      "parameters": {
+        "content": "# Smart Assistant Brain",
+        "height": 352,
+        "width": 528,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -464,
+        -5632
+      ],
+      "id": "1a828c77-def4-4e3f-bc5f-a0b10a471221",
+      "name": "Sticky Note16"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-5-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "role": "system",
+              "content": "=You are part of the Business Development team at an AI Automation Agency that designs and implements production-ready AI-driven workflows and agents to replace or optimize manual business processes.\n\nYour agency provides:\n\n- AI Assistants & Chatbots\n- RAG Systems (Document Q&A, Knowledge Bases)\n- Workflow Automation (n8n, APIs, AI Agents)\n- Decision-Making Agents\n- SaaS AI Integration\n- Internal AI-Powered Tools & Dashboards\n\nThe agency focuses strictly on high-ROI automation that saves time, reduces operational costs, or increases revenue.\n\nA new company has booked a consultation call.\n\nYour job is to analyze the provided research and generate a complete Business Development Intelligence Report that will help consultants prepare a highly personalized and high-conversion pitch.\n\nYou are provided with:\n\nCompany Website Research:\n{{ $json.company_website }}\n\nIndustry Challenges Research:\n\n{{ $json.company_challenges }}\n\nYour task is to generate a structured HTML report with the following sections:\n\nCompany Profile (Heading 2)\nProvide a clear, professional one-paragraph summary explaining:\n- What the company does\n- Their positioning\n- Services/products\n- Market focus\n\nCore Offerings (Heading 2)\nList their main products/services in bullet point format.\n\nTarget Market (Heading 2)\nBriefly explain who they serve and in which industry.\n\nObserved Strategic Priorities (Heading 2)\nBased on the website and positioning, infer 3–5 likely business priorities.\n\nIndustry Pain Points (Heading 2)\nBased on the industry research and company type, list the most relevant operational or strategic pain points they are likely facing.\n\nPain Points and AI Solutions (Heading 2)\nCreate a table with 3 columns:\n1. Pain Point – What challenge they are likely facing.\n2. Evidence – Why this is relevant to them based on research.\n3. AI Automation Solution – A specific automation solution our agency can implement.\n\nHigh-ROI Automation Opportunities (Heading 2)\nList the 5 highest ROI automation opportunities for this company.\nSort them in order of highest impact first.\nEach opportunity must include:\n- Name of opportunity\n- What it does\n- Why it is high ROI\n- Expected business impact (time saved, cost reduced, revenue improved)\n\nExecutive Pitch Angle (Heading 2)\nProvide a short strategic summary explaining how our agency should position the conversation during the consultation call to maximize conversion.\n\nImportant:\n- The output must be clean HTML.\n- Use proper <h2>, <ul>, <li>, <table>, <tr>, <td> formatting.\n- Do NOT wrap the output in ```html```.\n- This report will be inserted into the middle of an existing HTML document.\n\nGenerate a complete, strategic, pitch-ready report.\n"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        624,
+        -4704
+      ],
+      "id": "67116e23-5260-463a-8800-3d9fe2a3ddb0",
+      "name": "Message a model2"
+    },
+    {
+      "parameters": {
+        "content": "# 🤖 Step 7.1 — AI Generates Company Intelligence\n\nNow we send the structured company data to the AI node.\n\nThe AI reads:\n- Company research\n- Industry challenges\n\nThen it analyzes and converts raw information into structured insights.\n\nInstead of just data, we now get:\n- Company summary\n- Core offerings\n- Target market\n- Business priorities\n\n## Real-Life Example\nThis is like giving a research file to a business analyst.\nThe analyst reads everything and prepares a clean executive summary.\n\nAI is acting as that analyst.\n",
+        "height": 800,
+        "width": 2384
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1440,
+        -5040
+      ],
+      "id": "e1073399-cd7c-4217-8497-b27132761cba",
+      "name": "Sticky Note17"
+    },
+    {
+      "parameters": {
+        "content": "# 📧 Step 8 — Sending the Dynamic Email Report\n\nThe AI has generated the report in HTML format.\n\nNow we use that HTML output as the email body.\n\nInstead of writing a manual email,\nwe dynamically insert the AI response into the Gmail node.\n\nFlow:\nAI Output (HTML) → Email Node → Send Automatically\n\nEvery new form submission:\n- Triggers research\n- Generates AI report\n- Sends a personalized email\n\n## Real-Life Example\nNormally, a team would:\nResearch → Write report → Copy into email → Send manually\n\nWe automated all of it.\n\nThis connects everything:\nTrigger → Research → AI → Email\n\nNow the system runs fully on its own.\n",
+        "height": 640,
+        "width": 1840
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1408,
+        -3952
+      ],
+      "id": "4f49f414-c70d-4019-9e1c-745354b26c75",
+      "name": "Sticky Note18"
+    },
+    {
+      "parameters": {
+        "sendTo": "tech.mayankagg@gmail.com",
+        "subject": "Report",
+        "emailType": "text",
+        "message": "={{ $json.output[0].content[0].text }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        96,
+        -3696
+      ],
+      "id": "aa487a34-b8e0-458c-a928-e6ac24cf94ec",
+      "name": "Send a message2",
+      "webhookId": "2c8c9227-32a4-4f00-ab39-b992e3fc4b0f"
+    },
+    {
+      "parameters": {
+        "content": "![Dance] (https://media.tenor.com/Jx8GIe3ysgAAAAAi/rehman-dakait-dhurandhar.gif)",
+        "height": 432,
+        "width": 528
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -688,
+        -3136
+      ],
+      "id": "fd01e25d-8b97-423e-b18b-26b2c88762af",
+      "name": "Sticky Note19"
+    },
+    {
+      "parameters": {
+        "content": "# 🚀 Step 10 — You Just Built a Real AI System\n\nYou have now built a complete AI-powered automation system.\n\nFrom:\nTrigger → Research → Data Structuring → AI Analysis → Dynamic Email\n\nThis is not theory.\nThis is production-level automation thinking.\n\n## Where You Can Use This\n\nThis template works for:\n- Professionals automating internal workflows\n- Freelancers building client automation\n- Business owners scaling operations\n- Agencies creating AI services\n\nYou can modify the same structure for:\nLead generation, HR screening, Sales research, Content automation, Client onboarding, Market analysis.\n\nThe system remains the same.\nOnly the use case changes.\n\n## But This Is Just the Beginning\n\nThe industry is moving toward:\n\n- AI Agents\n- Multi-Agent Architectures\n- RAG (Retrieval Augmented Generation)\n- MCP (Model Context Protocol)\n- Autonomous Decision Systems\n- AI SaaS Integrations\n- AI Workflow Orchestration\n- AI-Powered Internal Tools\n\nAutomation is evolving into intelligent systems.\n\nToday you learned how to connect AI.\nNext level is building AI that thinks, collaborates, and decides.\n\nThis is where the future is heading.\n",
+        "height": 1008,
+        "width": 1760,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1312,
+        -1184
+      ],
+      "id": "39a68912-06ac-47c4-8d98-242ef56fd799",
+      "name": "Sticky Note20"
+    },
+    {
+      "parameters": {
+        "content": "# Check out our Full Masterclass\n\n## https://economictimes.indiatimes.com/masterclass/ai-product-mastery?utm_source=lightningsession&tg=lightningsession\n\n\n\n# Connect with me\n\n## https://www.youtube.com/@tech.mayankagg\n## https://www.linkedin.com/in/mayank953/",
+        "height": 464,
+        "width": 640,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1344,
+        128
+      ],
+      "id": "beed2563-c848-421a-ac50-2c99d479ff7f",
+      "name": "Sticky Note21"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d6f60ade-23c0-4f91-9c86-ff7dd939aed9",
+              "name": "name",
+              "value": "Aman Gupta",
+              "type": "string"
+            },
+            {
+              "id": "67c120b5-21ca-481a-b591-bc403340a5c0",
+              "name": "email",
+              "value": "aman.gupta@gmail.com",
+              "type": "string"
+            },
+            {
+              "id": "4ff4ffcf-0090-4e8f-ad3c-938da3683e0f",
+              "name": "linkedin_url",
+              "value": "https://www.linkedin.com/in/aman-gupta-7217a515/",
+              "type": "string"
+            },
+            {
+              "id": "1407d5d6-c29a-4e5d-9777-b8b094b35b75",
+              "name": "company_website",
+              "value": "https://www.boat-lifestyle.com/",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -720,
+        -14048
+      ],
+      "id": "35949774-4fe0-4d9d-a026-8dad910137f7",
+      "name": "Edit Fields6"
+    },
+    {
+      "parameters": {
+        "formTitle": "CONTACT INFO",
+        "formDescription": "PREPARING PITCH DECK AND INFORMATION ABOUT THE CLIENT",
+        "formFields": {
+          "values": [
+            {
+              "fieldName": "name",
+              "fieldLabel": "FULL NAME",
+              "placeholder": "Name",
+              "requiredField": true
+            },
+            {
+              "fieldName": "email",
+              "fieldLabel": "Email Address",
+              "fieldType": "email",
+              "placeholder": "Enter your E-mail",
+              "requiredField": true
+            },
+            {
+              "fieldName": "linkedin_url",
+              "fieldLabel": "LinkedIn Profile URL",
+              "requiredField": true
+            },
+            {
+              "fieldName": "company_website",
+              "fieldLabel": "Company Website",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.4,
+      "position": [
+        -256,
+        -14048
+      ],
+      "id": "146dfb44-cda1-492a-96ff-64db0f261a23",
+      "name": "On form submission7",
+      "webhookId": "cc0c5da7-c8df-4d2b-81fe-9254b42dea6f"
+    }
+  ],
+  "pinData": {
+    "On form submission": [
+      {
+        "json": {
+          "name": "Aman Gupta",
+          "email": "amangupta@yopmail.com",
+          "linkedin_url": "https://in.linkedin.com/in/aman-gupta-7217a515",
+          "company_website": "https://www.boat-lifestyle.com",
+          "submittedAt": "2026-02-14T20:00:39.219+05:30",
+          "formMode": "test"
+        }
+      }
+    ],
+    "On form submission3": [
+      {
+        "json": {
+          "name": "Aman Gupta",
+          "email": "amangupta@yopmail.com",
+          "linkedin_url": "https://in.linkedin.com/in/aman-gupta-7217a515",
+          "company_website": "https://www.boat-lifestyle.com",
+          "submittedAt": "2026-02-14T20:00:39.219+05:30",
+          "formMode": "test"
+        }
+      }
+    ],
+    "On form submission4": [
+      {
+        "json": {
+          "name": "Aman Gupta",
+          "email": "amangupta@yopmail.com",
+          "linkedin_url": "https://in.linkedin.com/in/aman-gupta-7217a515",
+          "company_website": "https://www.boat-lifestyle.com",
+          "submittedAt": "2026-02-14T20:00:39.219+05:30",
+          "formMode": "test"
+        }
+      }
+    ],
+    "On form submission5": [
+      {
+        "json": {
+          "name": "Aman Gupta",
+          "email": "amangupta@yopmail.com",
+          "linkedin_url": "https://in.linkedin.com/in/aman-gupta-7217a515",
+          "company_website": "https://www.boat-lifestyle.com",
+          "submittedAt": "2026-02-14T20:00:39.219+05:30",
+          "formMode": "test"
+        }
+      }
+    ],
+    "On form submission6": [
+      {
+        "json": {
+          "name": "Aman Gupta",
+          "email": "amangupta@yopmail.com",
+          "linkedin_url": "https://in.linkedin.com/in/aman-gupta-7217a515",
+          "company_website": "https://www.boat-lifestyle.com",
+          "submittedAt": "2026-02-14T20:00:39.219+05:30",
+          "formMode": "test"
+        }
+      }
+    ],
+    "company research & Challenges1": [
+      {
+        "json": {
+          "company_website": "![](https://www.facebook.com/tr?id=938265404227556&ev=PageView&noscript=1)\n\nGet Extra 5% Off On Prepaid Orders | Code: **BOATHEAD | **Shop Now!****\n\n![hamburger-icon](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/hamburger-icon_e04a19e8-1d6b-48f9-842c-3cc7c96368ae.png?v=1693460503)\n![hamburger-icon](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/hamburger-icon.png?v=1675762678)\n\n# [boAt Lifestyle](/)\n\n![](//www.boat-lifestyle.com/cdn/shop/files/boAt_logo_black_24889e30-925c-4185-a028-9fef497a8e44.svg?v=1732879339)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/boAt_logo_white.svg?v=1732875809)\n![search-icon](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/search_558f3ad8-0ef9-4a9b-8576-a396b44aacd8.png?v=1680091847)\n![search-icon](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/search_b57f9909-55e8-432a-95c3-734b258d2d9e.png?v=1693460577)\n\n#### Most Searched And Bought\n\n![]()\n![]()\n![]()\n![]()\n![]()\n![]()\n![]()\n![]()\n![]()\n![]()\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/final-loader.gif?v=1670845994)![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Profile-1.png?v=1663762989)\n\n**Hi boAthead!**\n\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/user_6be0d230-5262-4e4c-94b2-e796ba39b697.png?v=1663761259)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/user_22X22?.pngv=1614329938)\n\n#### Most Searched And Bought\n\n![]()\n![]()\n![]()\n![]()\n![]()\n![]()\n![]()\n![]()\n![]()\n![]()\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/final-loader.gif?v=1670845994)![True Wireless Earbuds](//www.boat-lifestyle.com/cdn/shop/collections/dropdown-TWS_100x.png?v=1684827062)\n\nTrue Wireless Earbuds\n\n![Neckbands](//www.boat-lifestyle.com/cdn/shop/collections/Neckbands_06214c1a-5e30-48ea-ac14-4a6bff679f48_100x.png?v=1684828287)\n\nNeckbands\n\n![Smart Watches](//www.boat-lifestyle.com/cdn/shop/collections/smartwatches_100x.png?v=1684827668)\n\nSmart Watches\n\n![Wireless Headphones](//www.boat-lifestyle.com/cdn/shop/collections/Rectangle271_100x.png?v=1701414051)\n\nWireless Headphones\n\n![Wireless Speakers](//www.boat-lifestyle.com/cdn/shop/collections/box-5_512x.png?v=1767866639)\n\nWireless Speakers\n\n![Soundbars](//www.boat-lifestyle.com/cdn/shop/collections/Collections_5baef8f1-a67a-40a5-a537-4258c6caae6a_100x.png?v=1684827849)\n\nSoundbars\n\n![Party Speakers](//www.boat-lifestyle.com/cdn/shop/collections/sound_bar_4f111a6a-2482-41c8-87f2-db7e0ee19e69_1_100x.webp?v=1684827961)\n\nParty Speakers\n\n![Power Banks](//www.boat-lifestyle.com/cdn/shop/collections/powerbank_100x.png?v=1684828045)\n\nPower Banks\n\n![Dashcams](//www.boat-lifestyle.com/cdn/shop/collections/dashcam_pp.1173_1_100x.png?v=1769063709)\n\nDashcams\n\n![Gaming Series](//www.boat-lifestyle.com/cdn/shop/collections/Immortal_category_Image_100x.png?v=1684827903)\n\nGaming Series\n\n![Chargers and Cables](//www.boat-lifestyle.com/cdn/shop/collections/Group_1707479022_224x.png?v=1767869619)\n\nChargers and Cables\n\n![Wired Headphones](//www.boat-lifestyle.com/cdn/shop/collections/wiredheadphones_100x.webp?v=1705400196)\n\nWired Headphones\n\n![Wired Earphones](//www.boat-lifestyle.com/cdn/shop/collections/Wiredearphones_100x.webp?v=1705399424)\n\nWired Earphones\n\n![Superhero Collection](//www.boat-lifestyle.com/cdn/shop/collections/imageedit_1_7038353159_100x.png?v=1684828134)\n\nSuperhero Collection\n\n![Limited Edition](//www.boat-lifestyle.com/cdn/shop/collections/dropdown-limited-edition_100x.png?v=1684828200)\n\nLimited Edition\n\n![redirect arrow](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/next.svg?v=1686829773)\n![redirect arrow](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/next.svg?v=1686829773)\n![redirect arrow](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/next.svg?v=1686829773)\n![redirect arrow](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/next.svg?v=1686829773)\n\nYour Cart\n\nYour cart is feeling lonely\n\n![Best Sellers](//www.boat-lifestyle.com/cdn/shop/files/best_seller_100X100.svg?v=1748341370)\n![True Wireless Earbuds](//www.boat-lifestyle.com/cdn/shop/files/tws_aa22d83e-8823-4d76-91e9-e75fd34fb51d_100X100.png?v=1748428298)\n![Wireless Headphones](//www.boat-lifestyle.com/cdn/shop/files/WH_b225905d-9064-4f64-9772-07fbcc521f0f_100X100.png?v=1748428298)\n![Neckbands](//www.boat-lifestyle.com/cdn/shop/files/neckband_660318e8-a68d-4572-bf8f-359f22319765_100X100.png?v=1748428772)\n![Smart Watches](//www.boat-lifestyle.com/cdn/shop/files/smartwatch_4b47c9df-5ea9-4149-9cf8-ff5a9c8f5cc1_100X100.png?v=1748428298)\n![Wireless Speakers](//www.boat-lifestyle.com/cdn/shop/files/WS_100X100.png?v=1748428298)\n![Soundbars](//www.boat-lifestyle.com/cdn/shop/files/LA_100X100.png?v=1748428298)\n![Party Speakers](//www.boat-lifestyle.com/cdn/shop/files/PS_100X100.png?v=1748428298)\n![Power Banks](//www.boat-lifestyle.com/cdn/shop/files/Powerbank_978fc76c-bfa8-4923-93e4-a4a40f4269fb_100X100.png?v=1748428298)\n![Wired Headphones](//www.boat-lifestyle.com/cdn/shop/files/Wired-Headphones_edbd6983-7c3e-43d9-b769-a153189effa0_100X100.png?v=1748428298)\n![Dashcams](//www.boat-lifestyle.com/cdn/shop/files/1080x1080_057c11d1-93b5-47c6-a947-e146c8046470_100X100.png?v=1769063408)\n![Wired Earphones](//www.boat-lifestyle.com/cdn/shop/files/Wired-H_100X100.png?v=1748428297)\n![Chargers and Cables](//www.boat-lifestyle.com/cdn/shop/files/15_14617b40-f00b-44d3-a798-219200e99409_100X100.png?v=1767870363)\n![Nirvana Series](//www.boat-lifestyle.com/cdn/shop/files/NIrvana_d128f925-4744-4758-aa38-d68064d357f1_100X100.png?v=1748428298)\n![Gaming Series](//www.boat-lifestyle.com/cdn/shop/files/Gaming_fa0a62ed-24ee-4d59-91a1-f792f114ee6e_100X100.png?v=1748428298)\n![](//www.boat-lifestyle.com/cdn/shop/files/mobile_e0a914ea-7ee3-4278-8af1-686febf99ce1.png?v=1770389418)\n![](//www.boat-lifestyle.com/cdn/shop/files/mobile_8c6e9e99-a72a-40cc-b096-8649d518daf4.png?v=1770359682)\n![](//www.boat-lifestyle.com/cdn/shop/files/MOBILE_582b2924-896f-4a7c-9e32-e889df7ecb31.png?v=1769065639)\n![](//www.boat-lifestyle.com/cdn/shop/files/mobile_6edba7d0-e6a1-49b8-ade3-9906ce5ad6c3.png?v=1770312532)\n![](//www.boat-lifestyle.com/cdn/shop/files/mobile_6cd780a9-6ae9-449c-b554-e0a545113633.png?v=1770312546)\n![](//www.boat-lifestyle.com/cdn/shop/files/MOBILE_967b6040-f283-472e-ae41-f4d6c28c0d5e.png?v=1768304410)\n![](//www.boat-lifestyle.com/cdn/shop/files/1080x720_1_762bd245-ff5c-4561-b2f1-6140fc084dcd.png?v=1764675747)\n![](//www.boat-lifestyle.com/cdn/shop/files/Rockerz_650_Pro_Mobile_3c9bfb08-cd4d-4cdd-a07b-7acb8d97a9b0.png?v=1764329299)\n![](//www.boat-lifestyle.com/cdn/shop/files/mobile_size.png?v=1766404077)\n![](//www.boat-lifestyle.com/cdn/shop/files/Artboard_2_73cbced1-4996-44ec-b4ee-7ddf99c9623b.png?v=1766040625)\n![arrow](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/arrow_homepage.svg?v=1685355827)\n![arrow](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/arrow_homepage.svg?v=1685355827)\n![](//www.boat-lifestyle.com/cdn/shop/files/Property_1_Variant4_190441b4-cb21-44f1-9056-93e37c496a68_2400x.png?v=1737718002)\n![](//www.boat-lifestyle.com/cdn/shop/files/Group_1707479128_3000x.png?v=1737718244)\n\n### Image with text block\n\n## Subheading\n\nUse block text to give your customers insight into your brand. Select impactful text that relates to your brand and story.\n\n![](//www.boat-lifestyle.com/cdn/shop/files/jshf_2-01-final-01_small.svg?v=1744365804)\n![](//www.boat-lifestyle.com/cdn/shop/files/Group_334302_small.svg?v=1682336123)\n![](//www.boat-lifestyle.com/cdn/shop/files/Group_334303_small.svg?v=1682336123)\n![](//www.boat-lifestyle.com/cdn/shop/files/Group_334304_small.svg?v=1682336123)\n\n### Sale **Is Live**\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Airdopes Alpha ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/AD_Alpha_new_colors.png?v=1747634146&width=400)\n\n74% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Nirvana Zenith Pro ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/zenith_pro_LR.png?v=1751544158&width=400)\n\n83% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Lunar Discovery ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Lifestyle_render_154400cd-4bd3-4dd8-9c4a-e56f27910199.jpg?v=1729580370&width=400)\n\n86% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Rockerz 255 Pro+ ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/r255pro_55d805bc-f2e1-4861-9533-8eee57081305.jpg?v=1682573437&width=400)\n\n75% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ EnergyShroom PB300 Pro ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/300_bLACK-min.png?v=1725983268&width=400)\n\n60% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Stone 350 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/1_fdcbadf5-5d2d-4ce3-9018-ee3e535fb60b.png?v=1745236290&width=400)\n\n63% off\n\n### Explore **Nirvana**\n\n![](//www.boat-lifestyle.com/cdn/shop/files/mobile_Artboard_1_33669c67-99bd-41cf-b4a4-889b1bb5d6e6_600x.png?v=1761645643)\n\n### Big **Deals**\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Airdopes 181 Pro ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/AD_181_pro_1.png?v=1745234576&width=400)\n\n78% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Storm Call 3 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Storm_Call_3.jpg?v=1712640243&width=400)\n\n87% off\n\n![ PartyPal 65 Pro ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Partypal_65_Pro.png?v=1759823976&width=400)\n\n66% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Airdopes Prime 701 ANC ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/701_ANC.png?v=1756381019&width=400)\n\n76% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Rockerz 650 Pro ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Rockerz_650_pp_renders_main_banner.124.png?v=1740735495&width=400)\n\n69% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Personalization](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/personalisation_ca8237cd-20ca-4da7-8ad2-7d8a50320b3c.png?v=1724308287)\n![ Energyshroom PB400 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/PB400_628ae039-11be-4f0b-b723-651e2bb05de7.jpg?v=1700300890&width=400)\n\n62% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Nirvana Zenith Pro ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/zenith_pro_LR.png?v=1751544158&width=400)\n\n83% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Airdopes Supreme ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/AD_Supreme_1.jpg?v=1711262453&width=400)\n\n80% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Personalization](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/personalisation_ca8237cd-20ca-4da7-8ad2-7d8a50320b3c.png?v=1724308287)\n![ Airdopes 161 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/AD_161.png?v=1745235467&width=400)\n\n68% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Airdopes 311 PRO ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/AD_311_Pro.jpg?v=1716880848&width=400)\n\n84% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹300 OFF\n![ Airdopes Loop ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Lifestyle_1.png?v=1732173396&width=400)\n\n75% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Personalization](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/personalisation_ca8237cd-20ca-4da7-8ad2-7d8a50320b3c.png?v=1724308287)\n![ Nirvana Ion ANC ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/ion_anc_1.png?v=1740725927&width=400)\n\n80% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹300 OFF\n![ Chrome Horizon ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/chrome__1.png?v=1745566456&width=400)\n\n67% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Storm Infinity ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/lifestyle__1.png?v=1742364005&width=400)\n\n75% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Lunar Discovery ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Lifestyle_render_154400cd-4bd3-4dd8-9c4a-e56f27910199.jpg?v=1729580370&width=400)\n\n86% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Wave Fury ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Wave_Fury.webp?v=1702287204&width=400)\n\n84% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Enigma Gem ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/gem.png?v=1736855558&width=400)\n\n67% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Ultima Ember ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Artboard-2_db11ca2a-22cb-42ef-8b50-13af4665c3a3.jpg?v=1740549378&width=400)\n\n78% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Aavante Bar 610 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/2_34e76ef0-ea01-4cb7-b656-47d140a1afba.jpg?v=1758708803&width=400)\n\n70% off\n\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Stone Arc Pro ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Stone_Arc_pro__1.png?v=1754993440&width=400)\n\n64% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹400 OFF\n![ Aavante 2.1 1550 Plus ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Aavante_2.jpg?v=1753695817&width=400)\n\n74% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Stone 350 Pro Naruto Edition ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Stone_x_Naruto_-min.png?v=1751366366&width=400)\n\n65% off\n\n![ Stone 110 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/110_1.png?v=1748586741&width=400)\n\n68% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Stone 580 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Stone_580.jpg?v=1692255219&width=400)\n\n70% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹300 OFF\n![ Rockerz 425 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/425.png?v=1645772065&width=400)\n\n43% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Rockerz 650 Pro ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Rockerz_650_pp_renders_main_banner.124.png?v=1740735495&width=400)\n\n69% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Rockerz 412 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/412.png?v=1752740230&width=400)\n\n57% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Rockerz 413 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/413_lifestyle.png?v=1752737623&width=400)\n\n57% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Rockerz 430 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/R430-LR.jpg?v=1730279165&width=400)\n\n52% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Rockerz 512 ANC ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/LR_fe121478-cff1-4470-bd51-447de036dd1e.png?v=1755498271&width=400)\n\n65% off\n\n### Shop **by** **Categories**\n\nShop **by** **Categories**\n\n![True Wireless Earbuds](//www.boat-lifestyle.com/cdn/shop/files/True-wireless-earbuds_small.png?v=1684842854)\n![Neckbands](//www.boat-lifestyle.com/cdn/shop/files/Neckbands_bc6343f4-622f-4ebd-bb36-205643c3bf78_small.png?v=1684842854)\n![Smart Watches](//www.boat-lifestyle.com/cdn/shop/files/Smartwatches_88f12bcf-24bd-4e3a-aacb-ecc204f62179_small.png?v=1684842853)\n![Nirvana](//www.boat-lifestyle.com/cdn/shop/files/nirvana_52689447-c1bb-4bb8-8fa0-0496e3715fc0_small.png?v=1727229889)\n![Wireless Headphones](//www.boat-lifestyle.com/cdn/shop/files/Wireless-Headphones_small.png?v=1684842854)\n![Wireless Speakers](//www.boat-lifestyle.com/cdn/shop/files/Wireless-Speaker_small.png?v=1684842854)\n![Dashcams](//www.boat-lifestyle.com/cdn/shop/files/100x100_small.png?v=1769063407)\n![Gaming Headphones](//www.boat-lifestyle.com/cdn/shop/files/Gaming-Headphones_small.png?v=1684842853)\n![Soundbars](//www.boat-lifestyle.com/cdn/shop/files/Soundbars_d9a7bdfd-e780-4581-ab85-f2e86f84cd28_small.png?v=1684842854)\n![Wired Headphones](//www.boat-lifestyle.com/cdn/shop/files/Wired-Headphones_small.png?v=1684842854)\n\n### Explore **Bestsellers**\n\n### Top Picks **For You**\n\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹300 OFF\n![ Chrome Iris ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Chrome_Iris_Lifestyle.png?v=1770270025&width=400)\n\n42% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Airdopes Prime 512 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Airdopes_Prime_512_lifestyle.png?v=1770016560&width=400)\n\n68% off\n\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹300 OFF\n![ HIVE Dashcam M1 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/M1_LIFESTYLE.png?v=1769766974&width=400)\n\n55% off\n\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ HIVE Dashcam E1 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Hive_Dashcam_E1_69c4c048-48b0-429f-86be-17c0e1239281.png?v=1769685335&width=400)\n\n57% off\n\n![ PartyPal 68 Pro ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/68_Pro_LI.png?v=1770033413&width=400)\n\n50% off\n\n![Bassheads 55 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Bassheads_55.png?v=1769586977&width=400)\n\n67% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Personalization](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/personalisation_ca8237cd-20ca-4da7-8ad2-7d8a50320b3c.png?v=1724308287)\n![ Airdopes 161 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/AD_161.png?v=1745235467&width=400)\n\n68% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Personalization](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/personalisation_ca8237cd-20ca-4da7-8ad2-7d8a50320b3c.png?v=1724308287)\n![ Airdopes 131 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/131_f04f74fd-45d4-4614-85cf-6ccf69c4cf90.jpg?v=1691395049&width=400)\n\n73% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Personalization](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/personalisation_ca8237cd-20ca-4da7-8ad2-7d8a50320b3c.png?v=1724308287)\n![ Nirvana Ion ANC ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/ion_anc_1.png?v=1740725927&width=400)\n\n80% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Personalization](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/personalisation_ca8237cd-20ca-4da7-8ad2-7d8a50320b3c.png?v=1724308287)\n![ Energyshroom PB400 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/PB400_628ae039-11be-4f0b-b723-651e2bb05de7.jpg?v=1700300890&width=400)\n\n62% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Personalization](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/personalisation_ca8237cd-20ca-4da7-8ad2-7d8a50320b3c.png?v=1724308287)\n![ Airdopes 141 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/141_ls.jpg?v=1741083860&width=400)\n\n78% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Personalization](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/personalisation_ca8237cd-20ca-4da7-8ad2-7d8a50320b3c.png?v=1724308287)\n![ Airdopes 163 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Airdopes-163.jpg?v=1682408982&width=400)\n\n44% off\n\n### Shop by **Lifestyle**\n\n![For Fitness](//www.boat-lifestyle.com/cdn/shop/files/jemmi_d1dd51d5-8b8b-47ad-9920-f8594669cbb2_429X322.png?v=1726059408)\n![For Parties](//www.boat-lifestyle.com/cdn/shop/files/Ranveer_429X322.png?v=1726038549)\n![For Work](//www.boat-lifestyle.com/cdn/shop/files/Aman_429X322.png?v=1726038424)\n![For Audiophiles](//www.boat-lifestyle.com/cdn/shop/files/YJ_429X322.png?v=1726059363)\n\n### Best Of **boAt**\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Personalization](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/personalisation_ca8237cd-20ca-4da7-8ad2-7d8a50320b3c.png?v=1724308287)\n![ Airdopes 131 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/131_f04f74fd-45d4-4614-85cf-6ccf69c4cf90.jpg?v=1691395049&width=400)\n\n73% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Personalization](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/personalisation_ca8237cd-20ca-4da7-8ad2-7d8a50320b3c.png?v=1724308287)\n![ Airdopes 141 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/141_ls.jpg?v=1741083860&width=400)\n\n78% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Personalization](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/personalisation_ca8237cd-20ca-4da7-8ad2-7d8a50320b3c.png?v=1724308287)\n![ Airdopes 161 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/AD_161.png?v=1745235467&width=400)\n\n68% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Rockerz 255 Pro+ ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/r255pro_55d805bc-f2e1-4861-9533-8eee57081305.jpg?v=1682573437&width=400)\n\n75% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Airdopes Alpha ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/AD_Alpha_new_colors.png?v=1747634146&width=400)\n\n74% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Personalization](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/personalisation_ca8237cd-20ca-4da7-8ad2-7d8a50320b3c.png?v=1724308287)\n![ Airdopes 163 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Airdopes-163.jpg?v=1682408982&width=400)\n\n44% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Aavante Prime 5.2.4 6250DA ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/lifestyle_bae842d7-5bf0-4e99-9614-88786d751c72.png?v=1753361523&width=400)\n\n73% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹400 OFF\n![ Aavante Prime 5.1 5000DA ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/AB_Prime_5000.jpg?v=1749535940&width=400)\n\n63% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Aavante 2.1 2450 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Avante_2450.png?v=1756878458&width=400)\n\n75% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Aavante Bar 480 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/AB_480.jpg?v=1698304318&width=400)\n\n71% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Aavante 2.1 1200 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Aavante_2.1_1200.png?v=1750758514&width=400)\n\n74% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Aavante Bar 610 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/2_34e76ef0-ea01-4cb7-b656-47d140a1afba.jpg?v=1758708803&width=400)\n\n70% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Airdopes Supreme ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/AD_Supreme_1.jpg?v=1711262453&width=400)\n\n80% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![ Airdopes 91 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/AD_91.jpg?v=1706776330&width=400)\n\n80% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Personalization](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/personalisation_ca8237cd-20ca-4da7-8ad2-7d8a50320b3c.png?v=1724308287)\n![ Airdopes 131 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/131_f04f74fd-45d4-4614-85cf-6ccf69c4cf90.jpg?v=1691395049&width=400)\n\n73% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Personalization](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/personalisation_ca8237cd-20ca-4da7-8ad2-7d8a50320b3c.png?v=1724308287)\n![ Airdopes 138 PRO ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Airdopes_138_Pro.jpg?v=1702618467&width=400)\n\n47% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Personalization](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/personalisation_ca8237cd-20ca-4da7-8ad2-7d8a50320b3c.png?v=1724308287)\n![ Airdopes 161 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/AD_161.png?v=1745235467&width=400)\n\n68% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Personalization](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/personalisation_ca8237cd-20ca-4da7-8ad2-7d8a50320b3c.png?v=1724308287)\n![ Airdopes 141 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/141_ls.jpg?v=1741083860&width=400)\n\n78% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Lunar Discovery ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Lifestyle_render_154400cd-4bd3-4dd8-9c4a-e56f27910199.jpg?v=1729580370&width=400)\n\n86% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹400 OFF\n![ Wave Call ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Wave_Call__1.jpg?v=1689751649&width=400)\n\n79% off\n\n![ Wave Call 3 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/LR_8d4944c8-c5a2-4e0e-83a5-7bf65ba385e2.png?v=1758615501&width=400)\n\n84% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹400 OFF\n![ Wave Call 2 Plus ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Wave_call_2_plus__1.png?v=1759155974&width=400)\n\n77% off\n\n![ Lunar Discovery Neo ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Lunar_Discovery_lifestyle.png?v=1764238352&width=400)\n\n80% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/offer_4000e398-1550-49a4-8cf7-00ae10d6b50d.png?v=1726470069)\nEXTRA ₹100 OFF\n![ Wave Sigma 3 ](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/wave_sigma_3_co.png?v=1741770848&width=400)\n\n83% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Dual Port Rapid Car Charger Online](//www.boat-lifestyle.com/cdn/shop/products/car-charger-main-image_1e0addf3-ca17-46c3-94ac-c7b60b752dea_300x.png?v=1663154266)\n\n47% off\n\n![boAt Dual Port Rapid Car Charger 3.0 (Qualcomm Certified)](//www.boat-lifestyle.com/cdn/shop/products/11_300x.png?v=1662706696)\n\n50% off\n\n![3 A Qualcomm 3.0 Turbo - Car Charger](//www.boat-lifestyle.com/cdn/shop/products/6875f924-20d3-4cb6-933d-5319504c7baa_36bb7013-05b6-4357-8048-f0e307a2a282_300x.png?v=1662706404)\n\n50% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![boAt Dual Port Rapid Car Charger (Qualcomm Certified) with Micro-USB Cable](//www.boat-lifestyle.com/cdn/shop/products/main_29e36d5a-17aa-4793-a817-3aa56fd1bfdf_300x.png?v=1633002682)\n\n52% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Dual QC-PD Port rapid car charger - Buy car charger online](//www.boat-lifestyle.com/cdn/shop/products/qc-pd_main_TC_300x.png?v=1627302470)\n\n72% off\n\n![star](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/star-5_20X20.png?v=1722331088)\n![verified reviews](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Mask_group-10.png?v=1677571152)\n![Dual QC-PD Port rapid car charger - Buy car charger online](//www.boat-lifestyle.com/cdn/shop/products/qc-pd_main_pd_300x.png?v=1627302177)\n\n63% off\n\n### Join the **Tribe**\n\nSubscribe to email alerts. We promise not to spam your inbox.\n\nYou’re all set! We’ll notify you once the sale begins and you can enjoy an additional 10% off with code BOATFEST10.\n\n![Load More](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/final-loader.gif?v=1670845994)\n\nIndia's fastest growing audio & wearables brand. The most incredible range of\n[wireless earphones](/collections/bluetooth-wireless-headphones),\n[earbuds](/collections/true-wireless-earbuds),\n[headphones](/collections/wired-headphones),\n[smart watches](/collections/smart-watches), and\n[home audio](/collections/home-audio). From workouts to adventures, boAt\nwill get you sailing!\n\n![logo](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/boAt_logo_black_830768d4-b3b0-4bef-8d5c-494df9bd6cbc.svg?v=1732875809)\n\nShop\n\nHelp\n\nCompany\n\nTrue Wireless Earbuds\n\nShop by Features\n\nShop by Price\n\nSmart Watches\n\nShop by Features\n\nShop by Identity\n\nShop by Price\n\nWireless Speakers\n\nShop by Features\n\nShop by Price\n\nSoundbars\n\nShop by Features\n\nShop by Price\n\nWireless Earphones\n\nShop by Features\n\nShop by Price\n\nWireless Headphones\n\nShop by Features\n\nShop by Price\n\nLimited Editions\n\nShop by Features\n\nPowerbanks\n\nShop by Features\n\nShop by Price\n\nChargers\n\nShop by Features\n\nCables\n\nShop by Features\n\nWired Headphones\n\nShop by Features\n\nLet's get social\n\nLet's get social\n\n© 2026 Imagine Marketing Limited. All Rights Reserved.  \n  \nFor queries contact us: Manager, Imagine Marketing Limited   \nUnit no. 204 & 205, 2nd floor, D-wing & E-wing,\n\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/whtsapp.png?v=1709276301)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/Chat-Icon.jpg?v=1690367119)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/rewards_0ac7af29-333c-465c-ae6a-5c88206a8638.png?v=1699258012)\n![](https://cdn.shopify.com/s/files/1/0057/8938/4802/files/personalisation-icon.png?v=1699258011)",
+          "company_challenges": "The Indian audio and wearable electronics market that boAt operates in faces several key challenges: fierce competition from both global brands such as Sony, JBL and Bose and a growing number of domestic manufacturers drives constant pressure on pricing and margins; price‑sensitive consumers demand high‑quality, stylish products at low cost, making affordable innovation essential; rapid technological change forces companies to update product features and software frequently, while maintaining compatibility with evolving smartphones and streaming platforms; complex and fragmented distribution channels—ranging from online marketplaces to small‑town retail networks—require sophisticated logistics and inventory management; high import duties and fluctuating currency rates increase the cost of components and affect pricing strategies; the proliferation of counterfeit and low‑quality knock‑off products erodes brand trust and can damage reputation; regulatory requirements around electronic waste, battery safety, and data privacy add compliance overhead; and finally, shifting consumer preferences toward sustainability and socially responsible brands push manufacturers to adopt greener materials and transparent supply‑chain practices, all of which must be balanced against the need for rapid market expansion."
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "On form submission7": [
+      {
+        "json": {
+          "name": "Aman Gupta",
+          "email": "amangupta@yopmail.com",
+          "linkedin_url": "https://in.linkedin.com/in/aman-gupta-7217a515",
+          "company_website": "https://www.boat-lifestyle.com",
+          "submittedAt": "2026-02-14T20:00:39.219+05:30",
+          "formMode": "test"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "On form submission4": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission5": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "company research & Challenges",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "company research & Challenges1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields4": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Edit Fields5": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission6": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields5",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Edit Fields4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "company research & Challenges1": {
+      "main": [
+        [
+          {
+            "node": "Message a model2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model2": {
+      "main": [
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "91fb68d5-ae1a-46ec-8938-70f0c72f669b",
+  "meta": {
+    "instanceId": "9415f7398b6025040c0e59f2400942330319d08e28d10e96e6db3d51cd32e420"
+  },
+  "id": "4FN7ZVZ8wzDUq5CS",
+  "tags": []
+}
