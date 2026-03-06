@@ -1,0 +1,1012 @@
+{
+  "name": "Candidate Registration Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Candidate Registration Agent Form",
+        "formDescription": "Candidate Registration Agent Form used to capture Candidate Information",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Full Name"
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email"
+            },
+            {
+              "fieldLabel": "Phone"
+            },
+            {
+              "fieldLabel": "Profession",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "IT"
+                  },
+                  {
+                    "option": "Sales"
+                  },
+                  {
+                    "option": "CIVIL"
+                  },
+                  {
+                    "option": "Medical"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Year of Exp"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        0,
+        80
+      ],
+      "id": "a0cbdbb2-3bcf-48f9-84e3-84059f528e32",
+      "name": "On form submission",
+      "webhookId": "07b0ad52-762a-4997-a1ae-c019b3ef346c"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.Profession }}",
+                    "rightValue": "IT",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d1b4a4a2-f487-425d-a80d-683fb4c9398e"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "296a67b2-925c-4504-a3b1-d82617c5aff1",
+                    "leftValue": "={{ $json.Profession }}",
+                    "rightValue": "Sales",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "de894d63-5853-42a0-99dc-fb5e4bb778bf",
+                    "leftValue": "={{ $json.Profession }}",
+                    "rightValue": "CIVIL",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "7b823052-2762-444e-96db-26422c4d1774",
+                    "leftValue": "={{ $json.Profession }}",
+                    "rightValue": "Medical",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        448,
+        48
+      ],
+      "id": "e089396d-6caa-4574-b2d6-349c2c483655",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1pUn0Ei4ADZHjJ_Cg2ndW4lB8vVhnGNqa7tJ-EkZD2r8",
+          "mode": "list",
+          "cachedResultName": "Candidate Registration Form",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pUn0Ei4ADZHjJ_Cg2ndW4lB8vVhnGNqa7tJ-EkZD2r8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 855211863,
+          "mode": "list",
+          "cachedResultName": "IT",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pUn0Ei4ADZHjJ_Cg2ndW4lB8vVhnGNqa7tJ-EkZD2r8/edit#gid=855211863"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "CandidateId": "={{ $('Create Consolidated Sheet').item.json.CandidateId }}",
+            "Full Name": "={{ $('Create Consolidated Sheet').item.json['Full Name'] }}",
+            "Email": "={{ $('Create Consolidated Sheet').item.json.Email }}",
+            "Phone": "={{ $('Create Consolidated Sheet').item.json.Phone }}",
+            "Profession": "={{ $('Create Consolidated Sheet').item.json.Profession }}",
+            "Year of Exp": "={{ $('Create Consolidated Sheet').item.json['Year of Exp'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "CandidateId",
+              "displayName": "CandidateId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Profession",
+              "displayName": "Profession",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Year of Exp",
+              "displayName": "Year of Exp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        672,
+        -208
+      ],
+      "id": "067369dd-4c35-4dfa-9ece-488ef40671df",
+      "name": "IT",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4SkzOVq6SPKzBLjQ",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1pUn0Ei4ADZHjJ_Cg2ndW4lB8vVhnGNqa7tJ-EkZD2r8",
+          "mode": "list",
+          "cachedResultName": "Candidate Registration Form",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pUn0Ei4ADZHjJ_Cg2ndW4lB8vVhnGNqa7tJ-EkZD2r8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 327326529,
+          "mode": "list",
+          "cachedResultName": "Sales",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pUn0Ei4ADZHjJ_Cg2ndW4lB8vVhnGNqa7tJ-EkZD2r8/edit#gid=327326529"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "CandidateId": "={{ $('Create Consolidated Sheet').item.json.CandidateId }}",
+            "Full Name": "={{ $('Create Consolidated Sheet').item.json['Full Name'] }}",
+            "Email": "={{ $('Create Consolidated Sheet').item.json.Email }}",
+            "Phone": "={{ $('Create Consolidated Sheet').item.json.Phone }}",
+            "Profession": "={{ $('Create Consolidated Sheet').item.json.Profession }}",
+            "Year of Exp": "={{ $('Create Consolidated Sheet').item.json['Year of Exp'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "CandidateId",
+              "displayName": "CandidateId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Profession",
+              "displayName": "Profession",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Year of Exp",
+              "displayName": "Year of Exp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        672,
+        -16
+      ],
+      "id": "d31dc2f6-0c9e-4065-97fa-2967e7abd063",
+      "name": "Sales",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4SkzOVq6SPKzBLjQ",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1pUn0Ei4ADZHjJ_Cg2ndW4lB8vVhnGNqa7tJ-EkZD2r8",
+          "mode": "list",
+          "cachedResultName": "Candidate Registration Form",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pUn0Ei4ADZHjJ_Cg2ndW4lB8vVhnGNqa7tJ-EkZD2r8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1204769713,
+          "mode": "list",
+          "cachedResultName": "CIVIL",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pUn0Ei4ADZHjJ_Cg2ndW4lB8vVhnGNqa7tJ-EkZD2r8/edit#gid=1204769713"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "CandidateId": "={{ $('Create Consolidated Sheet').item.json.CandidateId }}",
+            "Full Name": "={{ $('Create Consolidated Sheet').item.json['Full Name'] }}",
+            "Email": "={{ $('Create Consolidated Sheet').item.json.Email }}",
+            "Phone": "={{ $('Create Consolidated Sheet').item.json.Phone }}",
+            "Profession": "={{ $('Create Consolidated Sheet').item.json.Profession }}",
+            "Year of Exp": "={{ $('Create Consolidated Sheet').item.json['Year of Exp'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "CandidateId",
+              "displayName": "CandidateId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Profession",
+              "displayName": "Profession",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Year of Exp",
+              "displayName": "Year of Exp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        672,
+        176
+      ],
+      "id": "ff2fe750-ba45-4430-a3b0-8572413f0c5a",
+      "name": "CIVIL",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4SkzOVq6SPKzBLjQ",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=I want you to act like the best poem creator  and create two line poem based details given below, poem should be only two lines and easy to understand.\n\nI want you to include these things in the poem\n\nFullName :{{ $('On form submission').item.json['Full Name'] }}\nProfession :{{ $('On form submission').item.json.Profession }}\nYear of Experience: {{ $('On form submission').item.json['Year of Exp'] }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        912,
+        80
+      ],
+      "id": "f624f466-1302-4b89-b2f4-0638639ca4a7",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        896,
+        304
+      ],
+      "id": "a59c4b35-1244-4cf6-810c-ed03a8de12c2",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "yfLpMMSqfn2Bt9g1",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1pUn0Ei4ADZHjJ_Cg2ndW4lB8vVhnGNqa7tJ-EkZD2r8",
+          "mode": "list",
+          "cachedResultName": "Candidate Registration Form",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pUn0Ei4ADZHjJ_Cg2ndW4lB8vVhnGNqa7tJ-EkZD2r8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 313952900,
+          "mode": "list",
+          "cachedResultName": "Medical",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pUn0Ei4ADZHjJ_Cg2ndW4lB8vVhnGNqa7tJ-EkZD2r8/edit#gid=313952900"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "CandidateId": "={{ $('Create Consolidated Sheet').item.json.CandidateId }}",
+            "Full Name": "={{ $('Create Consolidated Sheet').item.json['Full Name'] }}",
+            "Email": "={{ $('Create Consolidated Sheet').item.json.Email }}",
+            "Phone": "={{ $('Create Consolidated Sheet').item.json.Phone }}",
+            "Profession": "={{ $('Create Consolidated Sheet').item.json.Profession }}",
+            "Year of Exp": "={{ $('Create Consolidated Sheet').item.json['Year of Exp'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "CandidateId",
+              "displayName": "CandidateId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Profession",
+              "displayName": "Profession",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Year of Exp",
+              "displayName": "Year of Exp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        672,
+        368
+      ],
+      "id": "da071304-d5b7-4806-9c4c-4b784486c41a",
+      "name": "Medical",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4SkzOVq6SPKzBLjQ",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1pUn0Ei4ADZHjJ_Cg2ndW4lB8vVhnGNqa7tJ-EkZD2r8",
+          "mode": "list",
+          "cachedResultName": "Candidate Registration Form",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pUn0Ei4ADZHjJ_Cg2ndW4lB8vVhnGNqa7tJ-EkZD2r8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pUn0Ei4ADZHjJ_Cg2ndW4lB8vVhnGNqa7tJ-EkZD2r8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "CandidateId": "=abb{{ $now.format('MMddhhmmss') }}",
+            "Full Name": "={{ $json['Full Name'] }}",
+            "Email": "={{ $json.Email }}",
+            "Phone": "={{ $json.Phone }}",
+            "Profession": "={{ $json.Profession }}",
+            "Year of Exp": "={{ $json['Year of Exp'] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "CandidateId",
+              "displayName": "CandidateId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Profession",
+              "displayName": "Profession",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Year of Exp",
+              "displayName": "Year of Exp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        80
+      ],
+      "id": "1f11a874-5b68-4d9a-b229-fe55a7a7403b",
+      "name": "Create Consolidated Sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4SkzOVq6SPKzBLjQ",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1pUn0Ei4ADZHjJ_Cg2ndW4lB8vVhnGNqa7tJ-EkZD2r8",
+          "mode": "list",
+          "cachedResultName": "Candidate Registration Form",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pUn0Ei4ADZHjJ_Cg2ndW4lB8vVhnGNqa7tJ-EkZD2r8/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Consolidated",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pUn0Ei4ADZHjJ_Cg2ndW4lB8vVhnGNqa7tJ-EkZD2r8/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "About": "={{ $('AI Agent').item.json.output }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "CandidateId",
+              "displayName": "CandidateId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Profession",
+              "displayName": "Profession",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Year of Exp",
+              "displayName": "Year of Exp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "About",
+              "displayName": "About",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1248,
+        80
+      ],
+      "id": "163a1b77-bc2c-48e8-bd72-ea30950b9a42",
+      "name": "Updated Consolidated Sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4SkzOVq6SPKzBLjQ",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('On form submission').item.json.Email }}",
+        "subject": "Thanks for your Registration !",
+        "message": "=Dear {{ $('On form submission').item.json['Full Name'] }}  ,\n\nThanks for your registration !\n\nwe will evaludate your details and will get back to you.\n\nRegards,\nHireing Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1456,
+        80
+      ],
+      "id": "cfd3af67-d3d1-4ff8-801a-1380244ce91e",
+      "name": "Send Mail",
+      "webhookId": "cca4a764-eae8-4f39-a910-5915b56ab6a1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "WqHZ4xtcvw87mnuw",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Create Consolidated Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "IT",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Sales",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "CIVIL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Medical",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IT": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sales": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CIVIL": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Medical": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Updated Consolidated Sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Consolidated Sheet": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Updated Consolidated Sheet": {
+      "main": [
+        [
+          {
+            "node": "Send Mail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "4ccb5508-7406-4c37-994d-b868dfca0fe9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dfab3dfb3a337e915778dbca5d1c85928525ca3ace11e5bfb3a25831f2f370d5"
+  },
+  "id": "9k085c0TzrGLLdtW",
+  "tags": []
+}
