@@ -1,0 +1,122 @@
+{
+  "name": "Test Plan Generator",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "aa434f82-8328-47b5-88b7-9a23e1c2a565",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "Create a html format Test Plan with colour coding for the AB Testing website App.vwo.com , Use this template Test Plan for <Product Details> Created by: [Your Name] 1. Objective This document outlines the test plan for the <Product Details> application. The objective is to ensure that all features and functionalities work as expected for the target audience, <Target Audience>. 2. Scope The scope of this test plan includes: Features to be tested: <Features> Types of testing: Manual testing, automated testing, performance testing, and accessibility testing. Environments: Different browsers, operating systems, and device types. Evaluation criteria: Number of defects found, time taken to complete testing, and user satisfaction ratings. Team roles and responsibilities: Test lead, testers, developers, etc. 3. Inclusions Introduction: Overview of the test plan, including purpose, scope, and goals. Test Objectives: Specific objectives such as identifying defects, improving user experience, or achieving a certain level of performance. 4. Exclusions List any features or components that are out of scope for this test plan. 5. Test Environments Operating Systems: Windows 10, macOS, Linux, etc. Browsers: Google Chrome, Mozilla Firefox, Microsoft Edge, etc. Devices: Desktop computers, laptops, tablets, smartphones, etc. Network Connectivity: Wi-Fi, cellular, wired connections. Hardware/Software Requirements: Specific processor, memory, storage capacity, etc. Security Protocols: Passwords, tokens, certificates. Access Permissions: Roles for team members such as testers, developers, stakeholders. 6. Defect Reporting Procedure Criteria for identifying defects: Deviation from requirements, user experience issues, technical errors. Steps for reporting defects: Using a designated template, providing detailed reproduction steps, attaching screenshots or logs. Triage and prioritization: Assigning severity and priority levels, assigning defects to appropriate team members. Tracking tools: Defect tracking software or project management tool. Roles and responsibilities: Testers, developers, test lead, etc. Communication channels: Updating stakeholders on progress and status of defects. Metrics: Number of defects found, time taken to resolve, percentage of defects fixed. 7. Test Strategy Step 1: Test scenarios and test cases creation: Techniques: Equivalence Class Partition, Boundary Value Analysis, Decision Table Testing, State Transition Testing, Use Case Testing. Additional methods: Error Guessing, Exploratory Testing. Step 2: Testing procedure: Smoke Testing: To check critical functionalities. In-depth Testing: Using created test cases after stable build passes Smoke Testing. Multiple environments: Simultaneous testing on multiple supported environments. Defect Reporting: Logging bugs in the tracking tool, daily status emails. Types of Testing: Smoke Testing, Sanity Testing, Regression Testing, Retesting, Usability Testing, Functionality & UI Testing. Step 3: Best Practices: Context Driven Testing: Testing as per the application's context. Shift Left Testing: Early testing from the development stages. Exploratory Testing: Apart from normal test case execution. End to End Flow Testing: Simulating end user flows. 8. Test Schedule Tasks and Time Duration: Creating test plan, test case creation, test case execution, summary reports submission. Dates: Specify the timeline for each task. 9. Test Deliverables Entry and Exit Criteria: For each phase of the Software Testing Life Cycle (STLC). 10. Entry and Exit Criteria Requirement Analysis: Entry: Receiving Requirements Documents. Exit: Understanding and clarifying requirements. Test Execution: Entry: Signed-off Test Scenarios and Test Cases, Application ready for testing. Exit: Test Case Reports, Defect Reports ready. Test Closure: Entry: Test Case Reports, Defect Reports ready. Exit: Test Summary Reports. 11. Tools List of Tools: JIRA Bug Tracking Tool, Mind map Tool, Snipping Screenshot Tool, Word and Excel documents. 12. Risks and Mitigations Possible Risks: Non-Availability of a Resource, Build URL not working, Less time for Testing. Mitigations: Backup Resource Planning, working on other tasks, ramping up resources dynamically. 13. Approvals Documents for Client Approval: Test Plan, Test Scenarios, Test Cases, Reports.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "ed77c247-68a0-4f6c-a341-1cf56f2c96b3",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        192,
+        192
+      ],
+      "id": "01664f1d-b720-4575-bc88-6e3515ba5d5b",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "yfLpMMSqfn2Bt9g1",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "qtpbibhu@gmail.com",
+        "subject": "Test Plan for AB Testing Website App.vwo.com By AI Agent",
+        "message": "=Dear User, \n\nPlease find Test Plan for AB Testing Website App.vwo.com generated By AI Agent !\n\n{{ $json.output }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        576,
+        0
+      ],
+      "id": "97579c3f-3db4-4767-9fe1-9a308c9c3216",
+      "name": "Send a message",
+      "webhookId": "99e4cb45-3015-435c-8124-a751b49ebaae",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "WqHZ4xtcvw87mnuw",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "4fff5261-0413-4231-a063-2a95845fe4be",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "dfab3dfb3a337e915778dbca5d1c85928525ca3ace11e5bfb3a25831f2f370d5"
+  },
+  "id": "FZUTG3oHQVdvXOYN",
+  "tags": []
+}
