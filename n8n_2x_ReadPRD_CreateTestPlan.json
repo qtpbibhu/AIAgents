@@ -1,0 +1,166 @@
+{
+  "name": "n8n_2x_ReadPRD_CreateTestPlan",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        -16
+      ],
+      "id": "ea673ee6-1667-4de5-a7ed-13df2f22440c",
+      "name": "When chat message received",
+      "webhookId": "e33be58a-e334-4143-a900-c2ef75f37712"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "A user will give you ticket ID, you need to read that id from jira tool and based on this jira id , you need to create test plan  "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        288,
+        -16
+      ],
+      "id": "6f8a5eda-69ba-4669-971e-28839e276310",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        304,
+        176
+      ],
+      "id": "27f6a7a0-457d-461a-a719-0b8a803458b0",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "issueKey": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Issue_Key', ``, 'string') }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.jiraTool",
+      "typeVersion": 1,
+      "position": [
+        432,
+        160
+      ],
+      "id": "e3ea430b-ccd6-4371-bcb9-906d33c13f78",
+      "name": "Read Jira Ticket",
+      "credentials": {
+        "jiraSoftwareCloudApi": {
+          "id": "PC5p10YF0ySXhWo4",
+          "name": "Jira SW Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        128,
+        176
+      ],
+      "id": "33010948-c6ae-4d4d-87db-d1fddfc34a76",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "IML6AaeB8mNTRU35",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Create Test plan by reading PRD from JIRA ticket in jira tool"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -320,
+        -208
+      ],
+      "typeVersion": 1,
+      "id": "53ea7a8b-8e99-4ee9-aa16-425e76f10ea9",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Jira Ticket": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "8f9d4c9e-096d-46a1-b478-7850c1d596e5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "70da5f96d858a008e761171cf0c07e3265646260c741ec65a9665bd7257b7afe"
+  },
+  "id": "Lp55aOu6zS8uGUhR",
+  "tags": [
+    {
+      "updatedAt": "2026-04-08T05:27:30.872Z",
+      "createdAt": "2026-04-08T05:27:30.872Z",
+      "id": "eah5g8rsqrALg7qS",
+      "name": "abbcreation"
+    }
+  ]
+}

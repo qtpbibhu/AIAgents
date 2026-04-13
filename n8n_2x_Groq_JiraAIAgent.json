@@ -1,0 +1,179 @@
+{
+  "name": "n8n_2x_Groq_JiraAIAgent",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -384,
+        -48
+      ],
+      "id": "828d562a-133e-4ef9-88d0-4d7a0b1f561c",
+      "name": "When chat message received",
+      "webhookId": "7f5dd5bc-3701-42fb-93f9-31339708b4cc"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are helpful assistant, Use the tool to create a bug"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -160,
+        -48
+      ],
+      "id": "1df1bd7f-fafa-4ec4-bafd-f20d53615b41",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        160
+      ],
+      "id": "c645ea61-d040-40f1-94ed-057610e66ca9",
+      "name": "LLM Brain",
+      "credentials": {
+        "groqApi": {
+          "id": "IML6AaeB8mNTRU35",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Create an AI agent(n8n) \n\nJIRA AI Agent "
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -480,
+        -224
+      ],
+      "typeVersion": 1,
+      "id": "570ee6fa-3b95-4eb7-81bb-cbb6378aaa5a",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -128,
+        176
+      ],
+      "id": "d0aa1f22-1d75-4fce-8d43-e19c2fda93c9",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "project": {
+          "__rl": true,
+          "value": "10001",
+          "mode": "list",
+          "cachedResultName": "abbcreation"
+        },
+        "issueType": {
+          "__rl": true,
+          "value": "10011",
+          "mode": "list",
+          "cachedResultName": "Bug"
+        },
+        "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}",
+        "additionalFields": {
+          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.jiraTool",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        160
+      ],
+      "id": "0e1677ed-f56a-4b59-bb60-9e6e5732b4eb",
+      "name": "Create an issue in Jira Software",
+      "credentials": {
+        "jiraSoftwareCloudApi": {
+          "id": "PC5p10YF0ySXhWo4",
+          "name": "Jira SW Cloud account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LLM Brain": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create an issue in Jira Software": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "8ec843bf-1a46-4b82-8932-b3fa7fb88a1d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "70da5f96d858a008e761171cf0c07e3265646260c741ec65a9665bd7257b7afe"
+  },
+  "id": "S9dAPV1aHeUttN3B",
+  "tags": [
+    {
+      "updatedAt": "2026-04-08T05:27:30.872Z",
+      "createdAt": "2026-04-08T05:27:30.872Z",
+      "id": "eah5g8rsqrALg7qS",
+      "name": "abbcreation"
+    }
+  ]
+}
