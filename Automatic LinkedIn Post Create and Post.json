@@ -1,0 +1,494 @@
+{
+  "name": "Automatic LinkedIn Post Create and Post",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -768,
+        240
+      ],
+      "id": "e6739270-fe67-4acb-b983-55314b6c3c6e",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "kM1rpSnYbn2YeM47",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -640,
+        240
+      ],
+      "id": "db037aea-e3b5-4b54-bfa6-26a3d219a841",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "content": "## Automated LinkedIn Post\nAutomated LinkedIn Content Creation  Scheduled Posts\n\n",
+        "height": 208,
+        "width": 384
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1504,
+        -288
+      ],
+      "typeVersion": 1,
+      "id": "4eeeabe3-9097-4d2c-b45c-435fa698fbb2",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"title\" : \"example\",\n  \"rationale\"  : \"example\",\n  \"hook\" : \"example\"\n}",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -512,
+        240
+      ],
+      "id": "1605acfd-a197-4071-92c1-5db89c0725d7",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -144,
+        240
+      ],
+      "id": "2326c7d9-ab09-49c2-ad6b-54e3b7b68c7a",
+      "name": "Google Gemini Chat Model1",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "kM1rpSnYbn2YeM47",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -432,
+        448
+      ],
+      "id": "dae32e73-b16e-4edf-beb1-49e302c24d4b",
+      "name": "Google Gemini Chat Model2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "kM1rpSnYbn2YeM47",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"content\" : \"Content of the generated LinkedIn post.\",\n  \"image_prompt\" : \" Image that the AI should generate.\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -16,
+        240
+      ],
+      "id": "97ba24b6-86ab-4439-87a2-4a143df79f3a",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -992,
+        16
+      ],
+      "id": "eafd95a4-b4a9-4624-ba97-cc8a6fa4f047",
+      "name": "When chat message received",
+      "webhookId": "efa676e4-6415-4f67-9a35-fcdf2834b8d6"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a high-performing LinkedIn content strategist and B2B copywriter.\n\nInput:\n\n- Title: {{ $json.output.title }}\n- Rationale: {{ $json.output.rationale }}\n- Suggested Hook: {{ $json.output.hook }}\nYour task:\nCreate a high-engagement LinkedIn post based on the inputs.\n\nRequirements:\n\n1. Start with the provided hook (optimize it if necessary for stronger scroll-stopping impact).\n2. Expand the core idea clearly and persuasively.\n3. Maintain a strong narrative flow (problem → shift → insight → implication).\n4. Keep it practical and insight-driven (no fluff or generic motivation).\n5. Use short paragraphs for readability.\n6. Include 3–5 sharp bullet points if helpful.\n7. End with:\n    - A strong takeaway or forward-looking statement\n    - A conversation-driving question\n\nTone:\n\n- Authoritative but conversational\n- Insightful and slightly bold\n- Written for professionals in tech/QA/engineering leadership\nLength:\n\n- 150–300 words\nAfter the post, also provide:\n\n\nGenerate a Image_Prpmpt also like below example : \n\nExample of Image_Prpmpt : A vibrant, modern cartoon-style tech illustration with a polished YouTube-thumbnail aesthetic. The scene features a clean UI dashboard inside a glowing browser window, with rounded corners and soft shadows. Use a neon gradient color palette (greens, purples, oranges) with subtle grid background.\n\nInclude bold, glossy UI cards and metrics panels with high contrast text, soft glow effects, and smooth gradients. Add playful floating icons around the scene to reinforce a tech/AI theme.\n\nOn one side, include a friendly cartoon avatar character with a big smile, expressive eyes, and simplified features, pointing toward the interface. Character should be semi-3D, vector-like, with soft shading and thick outlines.\n\nLighting should be soft but vibrant with glow accents and subtle highlights. Overall composition should feel dynamic, clean, and slightly futuristic.\n\nStyle inspired by modern SaaS marketing visuals, animated explainer thumbnails, and polished vector illustrations. Highly detailed, sharp, colorful, and engaging.\n",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -144,
+        16
+      ],
+      "id": "67e096f2-3af3-4e0b-983b-d466eff0a452",
+      "name": "Take Topic and Generate Linkedin Post and Image Prompt AI Agent"
+    },
+    {
+      "parameters": {
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a Senior QA architect and industry analyst writing in 2026.\n\nYour task is to generate ONLY ONE topic about:\n\n\"Software Testing in 2026\"\n\nConstraints:\n\n- Choose the single most impactful and future-defining shift.\n- Avoid generic themes unless you provide a deeply unique angle.\n- The topic must be bold, specific, and insight-driven.\n- It should reflect a real structural change in the industry (not surface-level trends).\n- The topic must be strong enough to anchor a keynote talk.\n- \n-  You can talk about Playwright AI agents, MCP, Playwright CLI, AI agents, n8n, LangFlow, RAG, MCP, Crew.ai, LLM evaluation  \nOutput format:\n\n1. Title (clear, bold, thought-provoking)\n2. One-sentence thesis (strong and definitive)\n3. Why this topic matters in 2026 (5–7 bullet points with reasoning)\nDo NOT generate multiple topics.\nDo NOT provide alternatives.\nCommit to one topic and defend it.\n\ndon't` make a complex topic, keep it very simple.`"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -720,
+        16
+      ],
+      "id": "910d1ccf-e6bd-475d-ba54-c8775041db29",
+      "name": "Create LinkedIn Topic Agent"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1xxp9ucaCuG2Jqe0UYUQ4tYzYgPeF5JNI--VcVqH90U0",
+          "mode": "list",
+          "cachedResultName": "LinkedIn_Post_Tracker",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1xxp9ucaCuG2Jqe0UYUQ4tYzYgPeF5JNI--VcVqH90U0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1xxp9ucaCuG2Jqe0UYUQ4tYzYgPeF5JNI--VcVqH90U0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Title": "={{ $('Create LinkedIn Topic Agent').item.json.output.title }}",
+            "Rational": "={{ $('Create LinkedIn Topic Agent').item.json.output.rationale }}",
+            "Hook": "={{ $('Create LinkedIn Topic Agent').item.json.output.hook }}",
+            "Status": "Draft",
+            "Date": "={{ $today }}",
+            "Content": "={{ $json.output.content }}",
+            "Image_Prompt": "={{ $json.output.image_prompt }}"
+          },
+          "matchingColumns": [
+            "Title"
+          ],
+          "schema": [
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Rational",
+              "displayName": "Rational",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Hook",
+              "displayName": "Hook",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Content",
+              "displayName": "Content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Image_Prompt",
+              "displayName": "Image_Prompt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        16
+      ],
+      "id": "8067bf09-367d-47b6-8811-3bcc9135be06",
+      "name": "LinkedIn Tracker",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "oJowBGZU4srzVXJc",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash-image",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash-image (Nano Banana)"
+        },
+        "prompt": "={{ $json.Image_Prompt }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        -992,
+        448
+      ],
+      "id": "b01aca66-5a3d-4ce8-a757-f8b7db2b870a",
+      "name": "Generate an image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "kM1rpSnYbn2YeM47",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "uploadText",
+        "user": "abbcreation",
+        "platform": [
+          "threads"
+        ],
+        "title": "={{ $('Take Topic and Generate Linkedin Post and Image Prompt AI Agent').item.json.output.content }}",
+        "threadsTitle": "="
+      },
+      "type": "n8n-nodes-upload-post.uploadPost",
+      "typeVersion": 1,
+      "position": [
+        656,
+        16
+      ],
+      "id": "002d19e7-d74e-4c71-a1cc-34f9041e91cd",
+      "name": "Upload a text post",
+      "credentials": {
+        "uploadPostApi": {
+          "id": "Vq2INlmqCti2QXOA",
+          "name": "Upload Post account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "model": "dall-e-2",
+        "prompt": "={{ $json.Image_Prompt }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        432,
+        16
+      ],
+      "id": "0943cb92-e417-4bce-8faf-fe6cee8b8f57",
+      "name": "Generate an image1",
+      "credentials": {
+        "openAiApi": {
+          "id": "QXZZ12rkBAOLbLo7",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Create LinkedIn Topic Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Create LinkedIn Topic Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Create LinkedIn Topic Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Take Topic and Generate Linkedin Post and Image Prompt AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Take Topic and Generate Linkedin Post and Image Prompt AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Create LinkedIn Topic Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Take Topic and Generate Linkedin Post and Image Prompt AI Agent": {
+      "main": [
+        [
+          {
+            "node": "LinkedIn Tracker",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create LinkedIn Topic Agent": {
+      "main": [
+        [
+          {
+            "node": "Take Topic and Generate Linkedin Post and Image Prompt AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LinkedIn Tracker": {
+      "main": [
+        [
+          {
+            "node": "Generate an image1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate an image": {
+      "main": [
+        []
+      ]
+    },
+    "Generate an image1": {
+      "main": [
+        [
+          {
+            "node": "Upload a text post",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "94b928ad-2218-4643-9c3c-9f952d68c7f7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "42cbc33677961ebb8ab2767fe5b3a0f9922574e3cdd58db7842e8289b0c92a57"
+  },
+  "id": "1lPHXErysqvEdkxk",
+  "tags": []
+}

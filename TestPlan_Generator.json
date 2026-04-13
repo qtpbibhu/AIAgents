@@ -1,0 +1,225 @@
+{
+  "name": "TestPlan_Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "34f3dc3d-b543-4e00-91a2-becb92b3a86f",
+      "name": "When chat message received",
+      "webhookId": "4daa8c8d-d494-4f3b-a046-96535412b925"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "A user will give you ticket ID, you need to read that id from jira tool and based on this jira id , you need to create test plan  "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        288,
+        0
+      ],
+      "id": "6fbc1b05-ba7d-4a86-8edb-3ed74af73eaa",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        352,
+        224
+      ],
+      "id": "6de4cd92-ec32-46f1-a864-b4a336c46924",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "issueKey": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Issue_Key', ``, 'string') }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.jiraTool",
+      "typeVersion": 1,
+      "position": [
+        496,
+        224
+      ],
+      "id": "c41d6ec2-d805-4416-bda3-f05f7634a48d",
+      "name": "Get an issue in Jira Software",
+      "credentials": {
+        "jiraSoftwareCloudApi": {
+          "id": "GQXnKaePFWsig1lz",
+          "name": "Jira SW Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Create Test plan by reading PRD from JIRA ticket in jira tool"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -336,
+        -16
+      ],
+      "typeVersion": 1,
+      "id": "d96566bb-41be-4705-a3f7-d2fc8a33ddca",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        224,
+        224
+      ],
+      "id": "0a22e77d-f0b5-4efc-b6d9-96a96d8cf605",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "C2JKi7gfdMrgV2mI",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "qtpbibhu@gmail.com",
+        "subject": "=Test Plan Generator",
+        "message": "=Dear User,\n\nPlease find below Test plan created by the agent for application app.vwo.com\n\n{{ $json.data }}\n\nRegards,\nAI Agent",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        912,
+        0
+      ],
+      "id": "d991b509-1f2b-4efd-90b2-e97a92f13cd6",
+      "name": "Send a message",
+      "webhookId": "74fec294-82c6-4ffd-814f-752260a599b9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "1caS3nI6WvkH9J0G",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "markdownToHtml",
+        "markdown": "={{ $json.output }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.markdown",
+      "typeVersion": 1,
+      "position": [
+        688,
+        0
+      ],
+      "id": "4b146b8b-2973-435f-a748-9b51983941ab",
+      "name": "Markdown"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get an issue in Jira Software": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Markdown",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Markdown": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "198fe240-e5eb-4213-a0dc-a1a190a3f8a1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "42cbc33677961ebb8ab2767fe5b3a0f9922574e3cdd58db7842e8289b0c92a57"
+  },
+  "id": "9WVayRE1eHihFWb3",
+  "tags": [
+    {
+      "updatedAt": "2026-04-05T05:12:00.944Z",
+      "createdAt": "2026-04-05T05:12:00.944Z",
+      "id": "fwrkI8QSdp6ZSQbE",
+      "name": "abbcreation"
+    }
+  ]
+}

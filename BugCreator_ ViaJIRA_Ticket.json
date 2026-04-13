@@ -1,0 +1,184 @@
+{
+  "name": "BugCreator_ ViaJIRA_Ticket",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e10e660b-cfcf-4c67-85f6-026efe54bf6d",
+      "name": "When chat message received",
+      "webhookId": "2c85bd9c-c5fa-4860-88c6-f4ec2d08016d"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are helpful assistant, Use the jira tool to create a bug"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        288,
+        0
+      ],
+      "id": "f1d9292e-cf39-4c6d-a3f3-2767b84bb16f",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        304,
+        240
+      ],
+      "id": "fc45d4a2-812f-4d83-93b1-dd664cedef85",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "content": "Create Bug for Login feature fails on app.vwo.com with valid credentials "
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -336,
+        -16
+      ],
+      "typeVersion": 1,
+      "id": "76e0137c-2433-433a-bbe7-883d6a8df605",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        144,
+        224
+      ],
+      "id": "dde7867c-e794-4f37-8553-39008fc24f3d",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "C2JKi7gfdMrgV2mI",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "project": {
+          "__rl": true,
+          "value": "10001",
+          "mode": "list",
+          "cachedResultName": "abbcreation"
+        },
+        "issueType": {
+          "__rl": true,
+          "value": "10011",
+          "mode": "list",
+          "cachedResultName": "Bug"
+        },
+        "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', ``, 'string') }}",
+        "additionalFields": {
+          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.jiraTool",
+      "typeVersion": 1,
+      "position": [
+        480,
+        224
+      ],
+      "id": "5cd1c5ae-4931-4681-ba75-82da94b661ca",
+      "name": "Create an issue in Jira Software",
+      "credentials": {
+        "jiraSoftwareCloudApi": {
+          "id": "GQXnKaePFWsig1lz",
+          "name": "Jira SW Cloud account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Create an issue in Jira Software": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "6af4609d-3061-4761-9c6d-bb8f90995f79",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "42cbc33677961ebb8ab2767fe5b3a0f9922574e3cdd58db7842e8289b0c92a57"
+  },
+  "id": "lRpE2L5J2XNkkS5k",
+  "tags": [
+    {
+      "updatedAt": "2026-04-05T05:12:00.944Z",
+      "createdAt": "2026-04-05T05:12:00.944Z",
+      "id": "fwrkI8QSdp6ZSQbE",
+      "name": "abbcreation"
+    }
+  ]
+}

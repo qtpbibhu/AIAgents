@@ -2,30 +2,56 @@
   "name": "Test Plan Generator",
   "nodes": [
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        0,
-        0
-      ],
-      "id": "aa434f82-8328-47b5-88b7-9a23e1c2a565",
-      "name": "When clicking ‘Execute workflow’"
-    },
-    {
       "parameters": {
-        "promptType": "define",
-        "text": "Create a html format Test Plan with colour coding for the AB Testing website App.vwo.com , Use this template Test Plan for <Product Details> Created by: [Your Name] 1. Objective This document outlines the test plan for the <Product Details> application. The objective is to ensure that all features and functionalities work as expected for the target audience, <Target Audience>. 2. Scope The scope of this test plan includes: Features to be tested: <Features> Types of testing: Manual testing, automated testing, performance testing, and accessibility testing. Environments: Different browsers, operating systems, and device types. Evaluation criteria: Number of defects found, time taken to complete testing, and user satisfaction ratings. Team roles and responsibilities: Test lead, testers, developers, etc. 3. Inclusions Introduction: Overview of the test plan, including purpose, scope, and goals. Test Objectives: Specific objectives such as identifying defects, improving user experience, or achieving a certain level of performance. 4. Exclusions List any features or components that are out of scope for this test plan. 5. Test Environments Operating Systems: Windows 10, macOS, Linux, etc. Browsers: Google Chrome, Mozilla Firefox, Microsoft Edge, etc. Devices: Desktop computers, laptops, tablets, smartphones, etc. Network Connectivity: Wi-Fi, cellular, wired connections. Hardware/Software Requirements: Specific processor, memory, storage capacity, etc. Security Protocols: Passwords, tokens, certificates. Access Permissions: Roles for team members such as testers, developers, stakeholders. 6. Defect Reporting Procedure Criteria for identifying defects: Deviation from requirements, user experience issues, technical errors. Steps for reporting defects: Using a designated template, providing detailed reproduction steps, attaching screenshots or logs. Triage and prioritization: Assigning severity and priority levels, assigning defects to appropriate team members. Tracking tools: Defect tracking software or project management tool. Roles and responsibilities: Testers, developers, test lead, etc. Communication channels: Updating stakeholders on progress and status of defects. Metrics: Number of defects found, time taken to resolve, percentage of defects fixed. 7. Test Strategy Step 1: Test scenarios and test cases creation: Techniques: Equivalence Class Partition, Boundary Value Analysis, Decision Table Testing, State Transition Testing, Use Case Testing. Additional methods: Error Guessing, Exploratory Testing. Step 2: Testing procedure: Smoke Testing: To check critical functionalities. In-depth Testing: Using created test cases after stable build passes Smoke Testing. Multiple environments: Simultaneous testing on multiple supported environments. Defect Reporting: Logging bugs in the tracking tool, daily status emails. Types of Testing: Smoke Testing, Sanity Testing, Regression Testing, Retesting, Usability Testing, Functionality & UI Testing. Step 3: Best Practices: Context Driven Testing: Testing as per the application's context. Shift Left Testing: Early testing from the development stages. Exploratory Testing: Apart from normal test case execution. End to End Flow Testing: Simulating end user flows. 8. Test Schedule Tasks and Time Duration: Creating test plan, test case creation, test case execution, summary reports submission. Dates: Specify the timeline for each task. 9. Test Deliverables Entry and Exit Criteria: For each phase of the Software Testing Life Cycle (STLC). 10. Entry and Exit Criteria Requirement Analysis: Entry: Receiving Requirements Documents. Exit: Understanding and clarifying requirements. Test Execution: Entry: Signed-off Test Scenarios and Test Cases, Application ready for testing. Exit: Test Case Reports, Defect Reports ready. Test Closure: Entry: Test Case Reports, Defect Reports ready. Exit: Test Summary Reports. 11. Tools List of Tools: JIRA Bug Tracking Tool, Mind map Tool, Snipping Screenshot Tool, Word and Excel documents. 12. Risks and Mitigations Possible Risks: Non-Availability of a Resource, Build URL not working, Less time for Testing. Mitigations: Backup Resource Planning, working on other tasks, ramping up resources dynamically. 13. Approvals Documents for Client Approval: Test Plan, Test Scenarios, Test Cases, Reports.",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 3.1,
       "position": [
-        224,
-        0
+        -1632,
+        -192
       ],
-      "id": "ed77c247-68a0-4f6c-a341-1cf56f2c96b3",
+      "id": "6bd7596f-d3de-4364-a9f1-252feae9a691",
       "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -1632,
+        208
+      ],
+      "id": "22b521ef-1c25-4ed1-aa27-0b038c9219c6",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -1632,
+        608
+      ],
+      "id": "8d064d3e-86ff-4e6c-8508-2aeb99170466",
+      "name": "AI Agent2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -1616,
+        1056
+      ],
+      "id": "48d661fc-8ea6-41bb-bed1-5d20af5a4506",
+      "name": "AI Agent3"
     },
     {
       "parameters": {
@@ -34,55 +60,267 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
       "typeVersion": 1,
       "position": [
-        192,
-        192
+        -1632,
+        32
       ],
-      "id": "01664f1d-b720-4575-bc88-6e3515ba5d5b",
+      "id": "b1826120-f44f-49a0-a264-d123f57705d9",
       "name": "Google Gemini Chat Model",
       "credentials": {
         "googlePalmApi": {
-          "id": "yfLpMMSqfn2Bt9g1",
+          "id": "kM1rpSnYbn2YeM47",
           "name": "Google Gemini(PaLM) Api account"
         }
       }
     },
     {
       "parameters": {
-        "sendTo": "qtpbibhu@gmail.com",
-        "subject": "Test Plan for AB Testing Website App.vwo.com By AI Agent",
-        "message": "=Dear User, \n\nPlease find Test Plan for AB Testing Website App.vwo.com generated By AI Agent !\n\n{{ $json.output }}",
         "options": {}
       },
-      "type": "n8n-nodes-base.gmail",
-      "typeVersion": 2.2,
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
       "position": [
-        576,
-        0
+        -1632,
+        432
       ],
-      "id": "97579c3f-3db4-4767-9fe1-9a308c9c3216",
-      "name": "Send a message",
-      "webhookId": "99e4cb45-3015-435c-8124-a751b49ebaae",
+      "id": "81d52e55-45b4-4f3f-80d3-6b33c2d51362",
+      "name": "Google Gemini Chat Model1",
       "credentials": {
-        "gmailOAuth2": {
-          "id": "WqHZ4xtcvw87mnuw",
-          "name": "Gmail account"
+        "googlePalmApi": {
+          "id": "kM1rpSnYbn2YeM47",
+          "name": "Google Gemini(PaLM) Api account"
         }
       }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1632,
+        832
+      ],
+      "id": "62ee8b84-e36e-47ef-b9ae-573b95efd280",
+      "name": "Google Gemini Chat Model2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "kM1rpSnYbn2YeM47",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -1632,
+        1344
+      ],
+      "id": "64bcf3de-17bd-4f40-b310-a6fc42e4ab60",
+      "name": "Google Gemini Chat Model3",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "kM1rpSnYbn2YeM47",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -1504,
+        32
+      ],
+      "id": "8812e5ec-30e4-4001-b06a-c80330165d4a",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -1504,
+        432
+      ],
+      "id": "0832b541-7a9a-4fa9-8e00-f17892f254f9",
+      "name": "Simple Memory1"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -1504,
+        832
+      ],
+      "id": "1c392469-d160-4a7a-bb45-3f1708373cca",
+      "name": "Simple Memory2"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -1504,
+        1344
+      ],
+      "id": "23c121b5-7cb9-472b-97a6-01dded78ea98",
+      "name": "Simple Memory3"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json['How Can Help You ?'] }}",
+                    "rightValue": "Test Strategy",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d30037f2-23e4-4346-ae51-32abfa7d11cd"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "660d2c8e-f291-4254-a8ad-94e78254ff38",
+                    "leftValue": "={{ $json['How Can Help You ?'] }}",
+                    "rightValue": "Test Plan",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "cb6c58ac-e09b-42ee-acff-0445c1d03ad9",
+                    "leftValue": "={{ $json['How Can Help You ?'] }}",
+                    "rightValue": "Test Case",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "679f71d3-14ed-4f70-95bc-276269bae271",
+                    "leftValue": "={{ $json['How Can Help You ?'] }}",
+                    "rightValue": "Bug Report",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -2720,
+        464
+      ],
+      "id": "bbebbd82-bb67-4de3-912b-50609add8b80",
+      "name": "QA Input Type"
+    },
+    {
+      "parameters": {
+        "formTitle": "QA Assistant Tool",
+        "formDescription": "This Agent is used to generate Test Strategy,  Test Plan, Test Case and bug report etc.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "How Can Help You ?",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Test Strategy"
+                  },
+                  {
+                    "option": "Test Plan"
+                  },
+                  {
+                    "option": "Test Case"
+                  },
+                  {
+                    "option": "Bug Report"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -3232,
+        512
+      ],
+      "id": "b9afdd98-4d57-42cc-bbca-e7b0afd20899",
+      "name": "QA Input",
+      "webhookId": "ccd28b61-b2b7-4b40-b56e-8d63cba60667"
     }
   ],
   "pinData": {},
   "connections": {
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Google Gemini Chat Model": {
       "ai_languageModel": [
         [
@@ -94,11 +332,120 @@
         ]
       ]
     },
-    "AI Agent": {
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent3",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory2": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory3": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent3",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "QA Input Type": {
       "main": [
         [
           {
-            "node": "Send a message",
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "QA Input": {
+      "main": [
+        [
+          {
+            "node": "QA Input Type",
             "type": "main",
             "index": 0
           }
@@ -109,14 +456,20 @@
   "active": false,
   "settings": {
     "executionOrder": "v1",
-    "binaryMode": "separate",
-    "availableInMCP": false
+    "binaryMode": "separate"
   },
-  "versionId": "4fff5261-0413-4231-a063-2a95845fe4be",
+  "versionId": "82ce9d82-c878-4404-8bae-60a4b50db023",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "dfab3dfb3a337e915778dbca5d1c85928525ca3ace11e5bfb3a25831f2f370d5"
+    "instanceId": "42cbc33677961ebb8ab2767fe5b3a0f9922574e3cdd58db7842e8289b0c92a57"
   },
-  "id": "FZUTG3oHQVdvXOYN",
-  "tags": []
+  "id": "MceznV2k1XZ003jl",
+  "tags": [
+    {
+      "updatedAt": "2026-04-05T05:12:00.944Z",
+      "createdAt": "2026-04-05T05:12:00.944Z",
+      "id": "fwrkI8QSdp6ZSQbE",
+      "name": "abbcreation"
+    }
+  ]
 }

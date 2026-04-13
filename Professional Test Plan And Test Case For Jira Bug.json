@@ -1,0 +1,447 @@
+{
+  "name": "Professional Test Plan And Test Case For Jira Bug",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -64,
+        0
+      ],
+      "id": "e8de7476-b438-4941-baf4-2cf3cff18aa1",
+      "name": "When chat message received",
+      "webhookId": "dffd3eec-779c-4128-b9c8-d3eb1c6f32b4"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        288,
+        224
+      ],
+      "id": "8623e75c-ee2f-4d4d-8a7c-a425453618d0",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "content": "#### **REAL LIVE Project( Multi Agent System) - Test Plan, Writer, Bug -> Triaging. **\n\nOutput : A professional Test Plan document for the Bug Occured (.docx)\n\nPipeline:\n\n1. JiraFetcherTool → fetches ticket from Jira REST API\n2. Test Plan Analyst → analyzes the ticket & identifies scope\n3. Test Plan Writer → writes the full test plan using a template,  the severity, priority, and let us know how important this bug is \n\n\n> JIRA Ticket -> Test Plan, TestCases -> Excel File (Templates which are given by us)\n\n",
+        "height": 416,
+        "width": 576
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -464,
+        -224
+      ],
+      "typeVersion": 1,
+      "id": "7d9ea035-d476-4342-982e-8a710fd33264",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "model": "openai/gpt-oss-120b:free",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        160,
+        224
+      ],
+      "id": "cd60e01f-7523-4e04-a06e-d18a285ebcb7",
+      "name": "OpenRouter Chat Model",
+      "credentials": {
+        "openRouterApi": {
+          "id": "C2JKi7gfdMrgV2mI",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "A user will give you ticket ID, you need to read that id from jira tool, analyze the ticket & identifies the scope and then based on this jira id , you need to create test plan  as per the test plan template in given google document tool\nmake sure you are adding severity, priority, and let add how important this bug is in the test plan "
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        288,
+        0
+      ],
+      "id": "d421046b-5015-45d4-abd5-2bae07bd73bc",
+      "name": "Create TestPan AI Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=\nYou are a Senior QA Engineer with 15+ years of hands-on experience in Functional, Integration, Regression, Edge Case, and System Testing across web, mobile, and API platforms.\n\nYour SOLE job is to generate atomic, traceable, Jira-importable test cases — strictly from documented sources — and write them into the TestCase_abbcreation tool, which is a Google Sheet. You do NOT invent, assume, or hallucinate requirements.\n\n\nSTEP 1 — SOURCE EXTRACTION (Mandatory)\n\nRead and extract ONLY documented facts from these authoritative sources:\n\nTest plan / Attached Document : {{ $json.output }}\nJira Ticket — Retrieve using the provided Jira ID.\n\nExtract ONLY the following, if explicitly documented:\n\nFeature description and scope\nAcceptance criteria (AC)\nBusiness rules and logic\nField-level validations and constraints\nTechnical dependencies and integrations\nExplicitly stated edge cases\nUI/UX specifications\nError messages and handling behavior\nHard Rules:\nDo NOT assume missing requirements.\nDo NOT create hypothetical user flows.\nDo NOT infer edge cases unless explicitly documented.\nDo NOT add test cases for features not mentioned in sources.\n\nIf required information is missing, record a gap entry before writing test cases:\n\nGap Type: Insufficient Information\nGap Description: Clearly state what scenario cannot be validated and what clarification is needed from PO/BA.\n\n\n\nSTEP 2 — TEST CASE DESIGN RULES\n\nDesign test cases strictly based on extracted content. Cover these categories ONLY if documented:\n\nCategory\tInclude When\nPositive Scenarios\tHappy path flows are described in AC\nNegative Scenarios\tError handling or invalid inputs are specified\nBoundary Value\tMin/max limits, character lengths, or ranges are defined\nField Validation\tRequired fields, formats, types are specified\nError Handling\tError messages or failure behaviors are documented\nIntegration\tCross-system or API dependencies are mentioned\nSecurity\tAuth, access control, or data protection rules exist\nPerformance\tLoad/response time criteria are stated\nEach Test Case MUST:\nBe atomic — validate exactly ONE behavior\nBe traceable — map to a specific Jira AC or business rule\nHave measurable expected results — verifiable pass/fail criteria\nUse precise QA language — no ambiguity\nInclude concrete test data — not placeholders like “valid input”\nSpecify clear preconditions — system state before execution\n\n\n\nSTEP 3 — OUTPUT DESTINATION (Strict Tool Usage)\n\nDo NOT return the final test cases as a markdown table in chat.\n\nYou MUST write the output into the TestCase_abbcreation tool only.\n\nFor each atomic test case, add one row in the Google Sheet with these exact columns:\n\nTest Case ID — Unique ID following pattern: TC_<MODULE>_<NNN>\nJira ID — Linked Jira ticket ID\nModule/Feature — Feature or module under test\nTest Case Title — Concise, action-oriented title starting with “Verify...”\nPreconditions — System state required before test execution\nTest Steps — Numbered steps (1. 2. 3.), sequential and reproducible\nTest Data — Specific, concrete test data values used in steps\nExpected Result — Observable, measurable outcome\nPriority — Critical / High / Medium / Low\nTest Type — Functional / Negative / Boundary / Integration / Security / Performance\nSheet Writing Rules:\nOne row = one atomic test case.\nNever combine multiple behaviors into one row.\nTest Steps must remain numbered within the same cell.\nExpected Result must be specific and verifiable.\nTest Data must contain actual values, not descriptions.\nUse this priority logic:\nCritical: Blocks core functionality or causes data loss\nHigh: Major feature flow or AC item\nMedium: Secondary validations or formatting\nLow: UI polish or cosmetic checks\n\n\n\nSTEP 4 — GAP HANDLING\n\nIf gaps exist, do NOT invent coverage.\n\nInstead:\n\nAdd a separate gap row into the sheet if the sheet supports gap tracking, or\nReturn a concise summary stating the gaps that prevented testcase generation for specific scenarios.\n\nGap wording format:\n\nGap Type: Insufficient Information / Ambiguous AC / Unmapped AC\nGap Description: [Specific missing info and recommendation]\n\nIf an AC is ambiguous:\n\nFlag it as a gap\nGenerate a testcase only if the documented behavior is still testable\nIn such cases, keep the expected result strictly tied to documented wording only\n\n\nSTEP 5 — COMPLETENESS CHECK\n\nBefore finishing:\n\nVerify every documented AC has at least one test case mapped to it.\nIdentify any unmapped ACs.\nDo not create duplicate coverage for the same behavior.\nWrite only validated, source-backed rows into TestCase_abbcreation.\n\n\n\nFINAL RESPONSE RULE\n\nAfter successfully writing to the TestCase_abbcreation tool:\n\nReturn only a short confirmation summary in chat.\nDo NOT print the full table in chat.\nInclude:\nJira ID processed\nNumber of test cases written\nNumber of gaps identified, if any\n\nExample final response:\n\nJira ID: KEN-7\nTest cases written to TestCase_abbcreation:  5\nGaps identified: 2\n\n\n\nGUARDRAILS (Non-Negotiable)\nZero Hallucination Policy: Every test case must trace to a documented requirement. If it is not documented, do not include it.\nNo Requirement Creation: Do not write requirements disguised as test cases.\nAmbiguity Flagging: If an AC is ambiguous, flag it as a gap.\nCompleteness Check: Ensure every documented AC is covered or explicitly flagged as unmapped.\nNo Duplicate Coverage: Each behavior should be tested exactly once.\nTool-First Output: The authoritative output is the TestCase_abbcreation Google Sheet, not the chat response.",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        752,
+        0
+      ],
+      "id": "f763df83-8843-4c23-90bc-1aa06ed264e9",
+      "name": "Generate Test Case AI Agent"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "issueKey": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Issue_Key', ``, 'string') }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.jiraTool",
+      "typeVersion": 1,
+      "position": [
+        416,
+        224
+      ],
+      "id": "88b80efe-762f-4115-af5d-80c7735aed8f",
+      "name": "Get Jira Details",
+      "credentials": {
+        "jiraSoftwareCloudApi": {
+          "id": "GQXnKaePFWsig1lz",
+          "name": "Jira SW Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "documentURL": "https://docs.google.com/document/d/1AphTOZ5hALS5DHunRerktzes7lWAYDVm/edit?usp=sharing&ouid=105089538088686380876&rtpof=true&sd=true"
+      },
+      "type": "n8n-nodes-base.googleDocsTool",
+      "typeVersion": 2,
+      "position": [
+        544,
+        224
+      ],
+      "id": "beb00c19-90a8-4f70-8e75-008156b4409b",
+      "name": "Get Test Plan Template",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "zO7kWISB5Sly1uhO",
+          "name": "Google Docs OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        752,
+        208
+      ],
+      "id": "9c5dbb34-7c17-4615-9968-48f34fc9b5fb",
+      "name": "Brain2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "kM1rpSnYbn2YeM47",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "qtpbibhu@gmail.com",
+        "subject": "Test Cases Generated !",
+        "message": "=Dear User,\n\nPFB test case details of your jira id\n\n{{ $json.output }}\n\nReagards,\nAI Agent",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1104,
+        0
+      ],
+      "id": "2c1e808d-173d-421a-9763-6e9f8e2cfdf5",
+      "name": "Gmail Notification1",
+      "webhookId": "59d562b2-cbe1-424f-962c-493dfa0268fc",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "1caS3nI6WvkH9J0G",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "12xeGC4J8dOkNNmIh_qikx9Ux6nYG-K8ynQZXUeqveyg",
+          "mode": "list",
+          "cachedResultName": "TestCase_abbcreation",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12xeGC4J8dOkNNmIh_qikx9Ux6nYG-K8ynQZXUeqveyg/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12xeGC4J8dOkNNmIh_qikx9Ux6nYG-K8ynQZXUeqveyg/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Test Case ID": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Test_Case_ID__using_to_match_', ``, 'string') }}",
+            "Jira ID": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Jira_ID', ``, 'string') }}",
+            "Module/Feature": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Module_Feature', ``, 'string') }}",
+            "Test Case Title": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Test_Case_Title', ``, 'string') }}",
+            "Preconditions": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Preconditions', ``, 'string') }}",
+            "Test Steps": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Test_Steps', ``, 'string') }}",
+            "Test Data": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Test_Data', ``, 'string') }}",
+            "Expected Result": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Expected_Result', ``, 'string') }}",
+            "Priority": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Priority', ``, 'string') }}",
+            "Test Type": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Test_Type', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "Test Case ID"
+          ],
+          "schema": [
+            {
+              "id": "Test Case ID",
+              "displayName": "Test Case ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Jira ID",
+              "displayName": "Jira ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Module/Feature",
+              "displayName": "Module/Feature",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Test Case Title",
+              "displayName": "Test Case Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Preconditions",
+              "displayName": "Preconditions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Test Steps",
+              "displayName": "Test Steps",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Test Data",
+              "displayName": "Test Data",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Expected Result",
+              "displayName": "Expected Result",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Priority",
+              "displayName": "Priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Test Type",
+              "displayName": "Test Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        896,
+        208
+      ],
+      "id": "9034d82c-de95-47db-983f-11a8a2e6f8ab",
+      "name": "Test Case Tracker",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "oJowBGZU4srzVXJc",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Create TestPan AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Create TestPan AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenRouter Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Create TestPan AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create TestPan AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Generate Test Case AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Test Case AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Gmail Notification1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Jira Details": {
+      "ai_tool": [
+        [
+          {
+            "node": "Create TestPan AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Test Plan Template": {
+      "ai_tool": [
+        [
+          {
+            "node": "Create TestPan AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Brain2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Generate Test Case AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Test Case Tracker": {
+      "ai_tool": [
+        [
+          {
+            "node": "Generate Test Case AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "34155157-f7c3-4db7-b22c-32db60d3216c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "42cbc33677961ebb8ab2767fe5b3a0f9922574e3cdd58db7842e8289b0c92a57"
+  },
+  "id": "hRlg8FkbOKJEuTH7",
+  "tags": [
+    {
+      "updatedAt": "2026-04-05T05:12:00.944Z",
+      "createdAt": "2026-04-05T05:12:00.944Z",
+      "id": "fwrkI8QSdp6ZSQbE",
+      "name": "abbcreation"
+    }
+  ]
+}
