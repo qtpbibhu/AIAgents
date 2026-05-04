@@ -1,0 +1,188 @@
+{
+  "name": "RAG Data Injestion",
+  "nodes": [
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "abbcreation",
+          "mode": "list",
+          "cachedResultName": "abbcreation"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        -160,
+        -96
+      ],
+      "id": "d56800a6-5892-45d6-a680-9a89fc55d7ca",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "3Z4jDE8Lxn0WLxlx",
+          "name": "Pinecone account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "formTitle": "Advance RAG System Data Ingestion",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Upload File",
+              "fieldType": "file",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -416,
+        -96
+      ],
+      "id": "641bad0e-646d-406a-b8e1-9684e18b79eb",
+      "name": "On form submission",
+      "webhookId": "1ec89c3f-2715-475d-86ff-0935ffb5ba40"
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-3-large",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -416,
+        336
+      ],
+      "id": "c9c08792-2c1f-4165-8586-97d850e1f2a5",
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "id": "XEEFX3LbGqS4nWjV",
+          "name": "OpenAI account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        -64,
+        128
+      ],
+      "id": "0db6df3a-d0d1-473f-993b-2d2761abab2f",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "chunkOverlap": 150,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        16,
+        336
+      ],
+      "id": "22421df7-b34e-435d-bb3c-1d3fd6ead116",
+      "name": "Recursive Character Text Splitter1"
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-embedding-001"
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        96
+      ],
+      "id": "2adde998-5b61-4077-ae12-bb9a7863c99f",
+      "name": "Embeddings Google Gemini",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "oygTH362SEhhzMTj",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        []
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter1": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "6c83e1fa-55d1-49a0-95b8-02e9b1001520",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "33b787114d992c5995a71e1b428aad374866497382defad28be0cce8245b962d"
+  },
+  "id": "QSUcFIXQh7jvNpBN",
+  "tags": []
+}

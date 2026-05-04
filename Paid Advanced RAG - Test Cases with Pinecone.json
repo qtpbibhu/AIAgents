@@ -1,0 +1,375 @@
+{
+  "name": "Paid Advanced RAG - Test Cases with Pinecone",
+  "nodes": [
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "abbcreation",
+          "mode": "list",
+          "cachedResultName": "abbcreation"
+        },
+        "options": {
+          "clearNamespace": false
+        }
+      },
+      "id": "1d726aba-da83-417e-8475-bbcd5480645b",
+      "name": "Insert to Pinecone",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        704,
+        304
+      ],
+      "credentials": {
+        "pineconeApi": {
+          "id": "3Z4jDE8Lxn0WLxlx",
+          "name": "Pinecone account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-3-large",
+        "options": {
+          "dimensions": 3072
+        }
+      },
+      "id": "97173f06-5e30-49f3-a33a-edc9f80b5375",
+      "name": "OpenAI Embeddings (Large)",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        672,
+        528
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "XEEFX3LbGqS4nWjV",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "id": "ae832ccd-2307-4354-8f36-b2077bb82d9e",
+      "name": "CSV Document Loader",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        1024,
+        544
+      ]
+    },
+    {
+      "parameters": {
+        "chunkOverlap": 200,
+        "options": {}
+      },
+      "id": "751a7856-d98a-4d44-ba1f-f97e9e66a176",
+      "name": "Text Splitter",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        1312,
+        752
+      ]
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a helpful assistant that answers questions about test cases. Use the vector store retriever tool to search for relevant test cases based on the user's question. Provide detailed and accurate information from the test cases, including test case IDs, descriptions, expected results, and status when available."
+        }
+      },
+      "id": "d1e2a1ac-2c57-4b1f-a245-1f0b7504b940",
+      "name": "RAG Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        112,
+        704
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "id": "21781430-26f2-484b-b284-bcb75b513bf2",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        912
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "XEEFX3LbGqS4nWjV",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "7548c32c-b8f1-4cf1-b6b8-2f140be060c0",
+      "name": "Agent Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        176,
+        928
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "abbcreation",
+          "mode": "list",
+          "cachedResultName": "abbcreation"
+        },
+        "useReranker": true,
+        "options": {}
+      },
+      "id": "6c09eb33-21af-43ef-9be2-e3d05351ce97",
+      "name": "Test Case Search Tool",
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        304,
+        928
+      ],
+      "credentials": {
+        "pineconeApi": {
+          "id": "3Z4jDE8Lxn0WLxlx",
+          "name": "Pinecone account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "topN": 5
+      },
+      "id": "a6831457-fc75-4778-9a65-a22592f56fb6",
+      "name": "Cohere Reranker",
+      "type": "@n8n/n8n-nodes-langchain.rerankerCohere",
+      "typeVersion": 1,
+      "position": [
+        608,
+        1088
+      ],
+      "credentials": {
+        "cohereApi": {
+          "id": "JSJgz1A3fil97xmW",
+          "name": "Cohere account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Data Ingestion\n\nUpload your CSV file with test cases here.\nThe data will be embedded and stored in Pinecone.",
+        "height": 200,
+        "width": 900,
+        "color": 2
+      },
+      "id": "99eaa4fb-af27-4941-a230-1cf4629a8bc3",
+      "name": "Sticky Note 4625a050",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        416,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Chat Interface\n\nUsers can ask questions about test cases.\nThe AI agent uses RAG with Cohere reranking for accurate results.",
+        "height": 200,
+        "width": 600,
+        "color": 4
+      },
+      "id": "064c029f-de34-44e8-b0b4-9e2d95210fdc",
+      "name": "Sticky Note 95eeefa4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        272
+      ]
+    },
+    {
+      "parameters": {
+        "formTitle": "RAG File",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "File",
+              "fieldType": "file",
+              "fieldName": "file",
+              "multipleFiles": false,
+              "acceptFileTypes": "=",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -240,
+        304
+      ],
+      "id": "9afc678d-66b6-4c61-98b2-aa9db01432e7",
+      "name": "On form submission",
+      "webhookId": "73fe8c49-a9b2-4fd8-bada-50bb2a038770"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "binaryPropertyName": "=file",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        256,
+        304
+      ],
+      "id": "7da6f12e-ca7f-4b44-8ced-de951f94d09d",
+      "name": "Extract from File"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI Embeddings (Large)": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Insert to Pinecone",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "Test Case Search Tool",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CSV Document Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Insert to Pinecone",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "CSV Document Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "RAG Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Agent Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "RAG Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Test Case Search Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "RAG Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cohere Reranker": {
+      "ai_reranker": [
+        [
+          {
+            "node": "Test Case Search Tool",
+            "type": "ai_reranker",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Insert to Pinecone",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "932c9e79-8640-411d-a8e3-5cc2e141184d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "33b787114d992c5995a71e1b428aad374866497382defad28be0cce8245b962d"
+  },
+  "id": "eaqkvBi74C7JJsq9",
+  "tags": []
+}
